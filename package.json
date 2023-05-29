@@ -1,0 +1,23 @@
+{
+  "name": "aiven-nextjs-netlify",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@aivenio/aquarium": "^1.21.0",
+    "@types/node": "^18.16.16",
+    "@types/react": "^17.0.60",
+    "@types/react-dom": "^17.0.20",
+    "eslint": "8.41.0",
+    "eslint-config-next": "13.4.4",
+    "next": "^12.3.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "typescript": "5.0.4"
+  }
+}
