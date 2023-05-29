@@ -1,0 +1,6 @@
+{
+  "extends": ["next/core-web-vitals", "prettier", "@aivenio/eslint-config-aiven/react"],
+  "rules": {
+    "react/react-in-jsx-scope": "off"
+  }
+}
