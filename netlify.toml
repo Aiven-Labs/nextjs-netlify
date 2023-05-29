@@ -1,0 +1,8 @@
+# example netlify.toml
+[build]
+  command = "npm run build-netlify"
+  publish = ".next"
+
+[template.environment]
+  DATABASE_URL = "postgresql://user:pass@host:port/db?schema=public"
+  REDIS_URI = "rediss://user:password@host:port"

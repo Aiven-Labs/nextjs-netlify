@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Recipe {
+  id               Int      @id @default(autoincrement())
+  recipeName       String   @map("recipe_name")
+  prepTimeMinutes  Int      @map("prep_time_minutes")
+  cookTimeMinutes  Int?     @map("cook_time_minutes")
+  totalTimeMinutes Int      @map("total_time_minutes")
+  servings         Int
+  yield            String?
+  ingredients      Json
+  directions       String[]
+  rating           Float
+  url              String?
+  imgSrc           String?
+  nutrition        String?
+  isLiked          Boolean  @default(false) @map("is_liked")
+
+  @@map("recipes")
+}
