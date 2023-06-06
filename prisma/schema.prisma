@@ -11,15 +11,19 @@ datasource db {
 }
 
 model Recipe {
-  id          Int      @id @default(autoincrement())
-  recipeName  String   @map("recipe_name")
-  prepTime    String   @map("prepTime")
-  cookTime    String?  @map("cook_time")
-  totalTime   String   @map("total_time")
-  servings    Int
-  yield       String?
-  ingredients Json
-  directions  String[]
-  rating      String
-  isFavorite  Boolean  @default(false)
+  id               Int      @id @default(autoincrement())
+  recipeName       String   @map("recipe_name")
+  prepTimeMinutes  Int      @map("prep_time_minutes")
+  cookTimeMinutes  Int?     @map("cook_time_minutes")
+  totalTimeMinutes Int      @map("total_time_minutes")
+  servings         Int
+  yield            String?
+  ingredients      Json
+  directions       String[]
+  rating           Float
+  url              String?
+  nutrition        String?
+  isFavorite       Boolean  @default(false) @map("is_favorite")
+
+  @@map("recipes")
 }
