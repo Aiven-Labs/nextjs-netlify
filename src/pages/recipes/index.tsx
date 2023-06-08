@@ -35,19 +35,26 @@ export default function Recipes() {
     mutate: refetchRecipes,
   } = useSWR<
     {
+      statistics: {
+        total: {
+          totalRecipesCount: number;
+          avgTotalServings: number;
+          avgTotalRating: number;
+          avgTotalPrepTimeMinutes: number;
+          avgTotalCookTimeMinutes: number;
+          avgTotalTotalTimeMinutes: number;
+        };
+        favorite: {
+          favoriteRecipesCount: number;
+          avgFavoriteServings: number;
+          avgFavoriteRating: number;
+          avgFavoritePrepTimeMinutes: number;
+          avgFavoriteCookTimeMinutes: number;
+          avgFavoriteTotalTimeMinutes: number;
+        };
+        recipeStatsCacheRetrievalTimeMs: string;
+      };
       recipes: Recipe[];
-      totalRecipesCount: number;
-      favoriteRecipesCount: number;
-      avgTotalServings: number;
-      avgFavoriteServings: number;
-      avgTotalRating: number;
-      avgFavoriteRating: number;
-      avgTotalPrepTimeMinutes: number;
-      avgFavoritePrepTimeMinutes: number;
-      avgTotalCookTimeMinutes: number;
-      avgFavoriteCookTimeMinutes: number;
-      avgTotalTotalTimeMinutes: number;
-      avgFavoriteTotalTimeMinutes: number;
       page: number;
       totalPages: number;
       hasPreviousPage: boolean;
@@ -67,6 +74,8 @@ export default function Recipes() {
       })
     ) ?? [];
 
+  const statistics = data?.statistics;
+
   useEffect(() => {
     if (data?.page) {
       setPage(data.page);
@@ -74,14 +83,20 @@ export default function Recipes() {
   }, [data?.page]);
 
   if (error) {
-    return <EmptyState title="Failed to load recipes." />;
+    return <EmptyState title={error.message ?? "Failed to load recipes."} />;
   }
 
   return (
     <Layout>
       <PageHeader
         title="Statistics"
-        subtitle="A list of recipes retrieved form a Aiven for PostgreSQL® database."
+        subtitle={
+          statistics?.recipeStatsCacheRetrievalTimeMs
+            ? `Recipe statistics cached in Aiven for Redis®, retrieved in ${statistics?.recipeStatsCacheRetrievalTimeMs}ms (end-to-end with round
+          trip, results will vary depending on the region of your Aiven
+          for Redis® instance).`
+            : "Recipe statistics retrieved from PostgreSQL database. To get cached results using Aiven for Redis®, please follow the instructions to set up your Redis instance."
+        }
       />
       {data && (
         <Box.Flex justifyContent="space-between" gap="5">
@@ -94,13 +109,13 @@ export default function Recipes() {
                 <Box.Flex justifyContent="space-between">
                   <Typography variant="body-small">All recipes</Typography>
                   <Typography variant="body-small">
-                    {data.totalRecipesCount}
+                    {statistics?.total.totalRecipesCount}
                   </Typography>
                 </Box.Flex>
                 <Box.Flex justifyContent="space-between">
                   <Typography variant="body-small">Favorite recipes</Typography>
                   <Typography variant="body-small">
-                    {data.favoriteRecipesCount}
+                    {statistics?.favorite.favoriteRecipesCount}
                   </Typography>
                 </Box.Flex>
                 <Divider />
@@ -110,7 +125,7 @@ export default function Recipes() {
                 <Box.Flex justifyContent="space-between">
                   <Typography variant="body-small">From all recipes</Typography>
                   <Typography variant="body-small">
-                    {data.avgTotalServings}
+                    {statistics?.total.avgTotalServings}
                   </Typography>
                 </Box.Flex>
                 <Box.Flex justifyContent="space-between">
@@ -118,7 +133,7 @@ export default function Recipes() {
                     From favorite recipes
                   </Typography>
                   <Typography variant="body-small">
-                    {data.avgFavoriteServings}
+                    {statistics?.favorite.avgFavoriteServings}
                   </Typography>
                 </Box.Flex>
                 <Divider />
@@ -128,7 +143,7 @@ export default function Recipes() {
                 <Box.Flex justifyContent="space-between">
                   <Typography variant="body-small">From all recipes</Typography>
                   <Typography variant="body-small">
-                    {data.avgTotalRating}
+                    {statistics?.total.avgTotalRating}
                   </Typography>
                 </Box.Flex>
                 <Box.Flex justifyContent="space-between">
@@ -136,7 +151,7 @@ export default function Recipes() {
                     From favorite recipes
                   </Typography>
                   <Typography variant="body-small">
-                    {data.avgFavoriteRating}
+                    {statistics?.favorite.avgFavoriteRating}
                   </Typography>
                 </Box.Flex>
               </Box.Flex>
@@ -151,7 +166,9 @@ export default function Recipes() {
                 <Box.Flex justifyContent="space-between">
                   <Typography variant="body-small">From all recipes</Typography>
                   <Typography variant="body-small">
-                    {formatTimeMinutes(data.avgTotalPrepTimeMinutes)}
+                    {formatTimeMinutes(
+                      data.statistics.total.avgTotalPrepTimeMinutes
+                    )}
                   </Typography>
                 </Box.Flex>
                 <Box.Flex justifyContent="space-between">
@@ -159,7 +176,9 @@ export default function Recipes() {
                     From favorite recipes
                   </Typography>
                   <Typography variant="body-small">
-                    {formatTimeMinutes(data.avgFavoritePrepTimeMinutes)}
+                    {formatTimeMinutes(
+                      data.statistics.favorite.avgFavoritePrepTimeMinutes
+                    )}
                   </Typography>
                 </Box.Flex>
                 <Divider />
@@ -171,7 +190,9 @@ export default function Recipes() {
                     From all recipes
                   </Typography>
                   <Typography variant="body-small">
-                    {formatTimeMinutes(data.avgTotalCookTimeMinutes)}
+                    {formatTimeMinutes(
+                      data.statistics.total.avgTotalCookTimeMinutes
+                    )}
                   </Typography>
                 </Box.Flex>
                 <Box.Flex justifyContent="space-between">
@@ -179,7 +200,9 @@ export default function Recipes() {
                     From favorite recipes
                   </Typography>
                   <Typography variant="body-small">
-                    {formatTimeMinutes(data.avgFavoriteCookTimeMinutes)}
+                    {formatTimeMinutes(
+                      data.statistics.favorite.avgFavoriteCookTimeMinutes
+                    )}
                   </Typography>
                 </Box.Flex>
                 <Divider />
@@ -191,7 +214,9 @@ export default function Recipes() {
                     From all recipes
                   </Typography>
                   <Typography variant="body-small">
-                    {formatTimeMinutes(data.avgTotalTotalTimeMinutes)}
+                    {formatTimeMinutes(
+                      data.statistics.total.avgTotalTotalTimeMinutes
+                    )}
                   </Typography>
                 </Box.Flex>
                 <Box.Flex justifyContent="space-between">
@@ -199,7 +224,9 @@ export default function Recipes() {
                     From favorite recipes
                   </Typography>
                   <Typography variant="body-small">
-                    {formatTimeMinutes(data.avgFavoriteTotalTimeMinutes)}
+                    {formatTimeMinutes(
+                      data.statistics.favorite.avgFavoriteTotalTimeMinutes
+                    )}
                   </Typography>
                 </Box.Flex>
               </Box.Flex>
@@ -207,7 +234,10 @@ export default function Recipes() {
           </Box>
         </Box.Flex>
       )}
-      <PageHeader title="All recipes" />
+      <PageHeader
+        title="All recipes"
+        subtitle="A list of recipes retrieved form a Aiven for PostgreSQL® database."
+      />
       {isLoading ? (
         <DataTable.Skeleton columns={4} rows={10} />
       ) : (
@@ -240,7 +270,7 @@ export default function Recipes() {
                   addRecipeToFavorites({
                     isFavorite: !row.isFavorite,
                     id: row.id,
-                    callback: refetchRecipes,
+                    onSuccess: refetchRecipes,
                   }),
                 text: row.isFavorite ? "Remove favorite" : "Add to favorites",
                 icon:

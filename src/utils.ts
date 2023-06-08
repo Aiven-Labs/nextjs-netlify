@@ -19,3 +19,24 @@ export const formatTimeMinutes = (minutes: number) => {
 
   return timeString.trim();
 };
+
+// Construct the nutrition string value to an object for visualization.
+export const parseNutritionInfo = (nutrition: string) => {
+  const infoArray = nutrition.split(", ");
+  const nutritionData: Record<string, { value: number; unit: string | null }> =
+    {};
+
+  for (let i = 0; i < infoArray.length; i++) {
+    const info = infoArray[i];
+    const matches = info.match(/([A-Za-z\s]+)\s([\d.]+)\s?(\w+)?/);
+
+    if (matches) {
+      const nutrient = matches[1].trim();
+      const value = parseFloat(matches[2]);
+      const unit = matches[3] ? matches[3].trim() : null;
+      nutritionData[nutrient] = { value, unit };
+    }
+  }
+
+  return nutritionData;
+};

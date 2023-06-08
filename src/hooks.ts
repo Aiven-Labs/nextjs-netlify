@@ -6,28 +6,36 @@ export const useRecipes = () => {
   const addRecipeToFavorites = async ({
     isFavorite,
     id,
-    callback,
+    onSuccess,
   }: {
     isFavorite: boolean;
     id: number;
-    callback: () => void;
+    onSuccess: () => void;
   }) => {
     setAlert(null);
     setAddingRecipeIdToFavorites(id);
 
-    try {
-      await fetch(`/api/recipes/${id}`, {
-        method: "PATCH",
-        body: JSON.stringify({ isFavorite }),
-      });
-
-      callback?.();
-    } catch {
+    const handleError = () => {
       setAlert({
         type: "error",
         title: "Error while adding recipe to favorites.",
         onDismiss: () => setAlert(null),
       });
+    };
+
+    try {
+      const res = await fetch(`/api/recipes/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ isFavorite }),
+      });
+
+      if (!res.ok) {
+        handleError();
+      }
+
+      onSuccess();
+    } catch {
+      handleError();
     } finally {
       setAddingRecipeIdToFavorites(null);
     }

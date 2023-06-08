@@ -19,28 +19,7 @@ import arrowLeft from "@aivenio/aquarium/icons/arrowLeft";
 import { useAppContext } from "@/context";
 import { useRecipes } from "@/hooks";
 import Image from "next/image";
-import { formatTimeMinutes } from "@/utils";
-
-// Construct the nutrition string value to an object for visualization.
-const parseNutritionInfo = (nutrition: string) => {
-  const infoArray = nutrition.split(", ");
-  const nutritionData: Record<string, { value: number; unit: string | null }> =
-    {};
-
-  for (let i = 0; i < infoArray.length; i++) {
-    const info = infoArray[i];
-    const matches = info.match(/([A-Za-z\s]+)\s([\d.]+)\s?(\w+)?/);
-
-    if (matches) {
-      const nutrient = matches[1].trim();
-      const value = parseFloat(matches[2]);
-      const unit = matches[3] ? matches[3].trim() : null;
-      nutritionData[nutrient] = { value, unit };
-    }
-  }
-
-  return nutritionData;
-};
+import { formatTimeMinutes, parseNutritionInfo } from "@/utils";
 
 export default function RecipeDetail() {
   const {
@@ -52,7 +31,6 @@ export default function RecipeDetail() {
 
   const {
     data,
-    isLoading,
     error,
     mutate: refetchRecipe,
   } = useSWR<Recipe, ErrorResponse>(
@@ -63,7 +41,7 @@ export default function RecipeDetail() {
   const nutritionData = data?.nutrition && parseNutritionInfo(data?.nutrition);
 
   if (error) {
-    return <EmptyState title="Failed to load recipe." />;
+    return <EmptyState title={error.message ?? "Failed to load recipe."} />;
   }
 
   return (
@@ -88,7 +66,7 @@ export default function RecipeDetail() {
                     addRecipeToFavorites({
                       isFavorite: !data.isFavorite,
                       id: data.id,
-                      callback: refetchRecipe,
+                      onSuccess: refetchRecipe,
                     }),
                   loading: addingRecipeIdToFavorites === data.id,
                 },

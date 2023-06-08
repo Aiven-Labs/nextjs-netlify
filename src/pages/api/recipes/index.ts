@@ -1,6 +1,13 @@
 import { DEFAULT_PAGE_SIZE } from "@/constants";
 import type { NextApiRequest, NextApiResponse } from "next";
-import prisma from "@/lib/prisma";
+import prisma, {
+  calculateFavoriteStats,
+  calculateTotalStats,
+} from "@/lib/prisma";
+import { createRedisInstance, getCachedDataFromRedis } from "@/lib/ioredis";
+import { REDIS_RECIPE_STATS_KEY } from "@/constants";
+
+const redis = createRedisInstance();
 
 export default async function handler(
   req: NextApiRequest,
@@ -24,48 +31,55 @@ export default async function handler(
       ],
     });
 
-    const {
-      _count: totalRecipesCount,
-      _avg: {
-        servings: avgTotalServings,
-        rating: avgTotalRating,
-        prepTimeMinutes: avgTotalPrepTimeMinutes,
-        cookTimeMinutes: avgTotalCookTimeMinutes,
-        totalTimeMinutes: avgTotalTotalTimeMinutes,
-      },
-    } = await prisma.recipe.aggregate({
-      _count: true,
-      _avg: {
-        servings: true,
-        rating: true,
-        prepTimeMinutes: true,
-        cookTimeMinutes: true,
-        totalTimeMinutes: true,
-      },
-    });
+    let totalStats: Awaited<ReturnType<typeof calculateTotalStats>>;
+    let favoriteStats: Awaited<ReturnType<typeof calculateFavoriteStats>>;
+    let recipeStatsCacheRetrievalTimeMs;
+
+    // If Redis is available, retrieve cache for recipe stats and update the cache if it has not been populated.
+    // Sometimes the redis instance might have a status of "connecting", which still allows querying the database.
+    if (redis?.status === "ready" || redis?.status === "connecting") {
+      const {
+        result: recipeStatsCache,
+        executionTime: totalStatsExecutionTime,
+      } = await getCachedDataFromRedis({
+        redis,
+        key: REDIS_RECIPE_STATS_KEY,
+      });
+
+      if (!recipeStatsCache) {
+        totalStats = await calculateTotalStats();
+        favoriteStats = await calculateFavoriteStats();
+
+        await redis.set(
+          REDIS_RECIPE_STATS_KEY,
+          JSON.stringify({ totalStats, favoriteStats })
+        );
+      } else {
+        recipeStatsCacheRetrievalTimeMs = totalStatsExecutionTime;
+        ({ totalStats, favoriteStats } = JSON.parse(recipeStatsCache));
+      }
+    } else {
+      totalStats = await calculateTotalStats();
+      favoriteStats = await calculateFavoriteStats();
+    }
 
     const {
-      _count: favoriteRecipesCount,
-      _avg: {
-        servings: avgFavoriteServings,
-        rating: avgFavoriteRating,
-        prepTimeMinutes: avgFavoritePrepTimeMinutes,
-        cookTimeMinutes: avgFavoriteCookTimeMinutes,
-        totalTimeMinutes: avgFavoriteTotalTimeMinutes,
-      },
-    } = await prisma.recipe.aggregate({
-      _count: true,
-      _avg: {
-        servings: true,
-        rating: true,
-        prepTimeMinutes: true,
-        cookTimeMinutes: true,
-        totalTimeMinutes: true,
-      },
-      where: {
-        isFavorite: true,
-      },
-    });
+      totalRecipesCount,
+      avgTotalServings,
+      avgTotalRating,
+      avgTotalPrepTimeMinutes,
+      avgTotalCookTimeMinutes,
+      avgTotalTotalTimeMinutes,
+    } = totalStats;
+
+    const {
+      favoriteRecipesCount,
+      avgFavoriteServings,
+      avgFavoriteRating,
+      avgFavoritePrepTimeMinutes,
+      avgFavoriteCookTimeMinutes,
+      avgFavoriteTotalTimeMinutes,
+    } = favoriteStats;
 
     const totalPages = Math.ceil(totalRecipesCount / DEFAULT_PAGE_SIZE);
     const resultsBeforeCurrentPage = DEFAULT_PAGE_SIZE * (page - 1);
@@ -75,19 +89,26 @@ export default async function handler(
     const hasNextPage = resultsAfterCurrentPage > 0;
 
     res.json({
+      statistics: {
+        total: {
+          totalRecipesCount,
+          avgTotalServings,
+          avgTotalRating,
+          avgTotalPrepTimeMinutes,
+          avgTotalCookTimeMinutes,
+          avgTotalTotalTimeMinutes,
+        },
+        favorite: {
+          favoriteRecipesCount,
+          avgFavoriteServings,
+          avgFavoriteRating,
+          avgFavoritePrepTimeMinutes,
+          avgFavoriteCookTimeMinutes,
+          avgFavoriteTotalTimeMinutes,
+        },
+        recipeStatsCacheRetrievalTimeMs,
+      },
       recipes,
-      totalRecipesCount,
-      favoriteRecipesCount,
-      avgTotalServings: avgTotalServings?.toFixed(),
-      avgFavoriteServings: avgFavoriteServings?.toFixed(),
-      avgTotalRating: avgTotalRating?.toFixed(2),
-      avgFavoriteRating: avgFavoriteRating?.toFixed(2),
-      avgTotalPrepTimeMinutes: avgTotalPrepTimeMinutes?.toFixed(),
-      avgFavoritePrepTimeMinutes: avgFavoritePrepTimeMinutes?.toFixed(),
-      avgTotalCookTimeMinutes: avgTotalCookTimeMinutes?.toFixed(),
-      avgFavoriteCookTimeMinutes: avgFavoriteCookTimeMinutes?.toFixed(),
-      avgTotalTotalTimeMinutes: avgTotalTotalTimeMinutes?.toFixed(),
-      avgFavoriteTotalTimeMinutes: avgFavoriteTotalTimeMinutes?.toFixed(),
       page,
       totalPages,
       hasPreviousPage,

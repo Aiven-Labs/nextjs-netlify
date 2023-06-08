@@ -1,5 +1,5 @@
 import { Layout } from "@/components/Layout/Layout";
-import { Box, Button, Chip, Icon, Link, Typography } from "@aivenio/aquarium";
+import { Box, Button, Chip, Icon, Typography } from "@aivenio/aquarium";
 import arrowRight from "@aivenio/aquarium/icons/arrowRight";
 
 export default function Home() {
