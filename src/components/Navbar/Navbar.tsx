@@ -12,7 +12,7 @@ export const Navbar: React.FC = () => (
       <Link href="/">Home</Link>
       <Link href="/recipes">Recipes</Link>
     </Box>
-    <Box marginLeft="auto">
+    <Box marginLeft="auto" className={styles.netlifyDeployButton}>
       <Button.ExternalLink href="#">Deploy to Netlify</Button.ExternalLink>
     </Box>
   </nav>

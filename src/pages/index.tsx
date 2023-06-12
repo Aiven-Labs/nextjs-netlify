@@ -13,18 +13,23 @@ export default function Home() {
         flex={1}
         style={{ textAlign: "center" }}
       >
-        <Box display="flex" gap="3">
+        <Box
+          display="flex"
+          gap="3"
+          justifyContent="center"
+          className="flex-wrap"
+        >
           <Chip text="Aiven for PostgreSQL®" />
           <Chip text="Aiven for Redis®" />
         </Box>
         <Typography.LargeHeading>
           Free quickstart app using Next.js, Prisma and Aiven
         </Typography.LargeHeading>
-        <Typography variant="body-large" color="grey-60">
+        <Typography.Large color="grey-60">
           A PostgreSQL and Redis optimized React application built with Aiven,
           Prisma, Netlify, with open source data - for free.
-        </Typography>
-        <Box.Flex gap="5">
+        </Typography.Large>
+        <Box.Flex gap="5" justifyContent="center" className="flex-wrap">
           <Button.ExternalLink href="#">Deploy to Netlify</Button.ExternalLink>
           <Button.ExternalLink
             href="https://github.com/aiven/nextjs-netlify"
@@ -39,7 +44,13 @@ export default function Home() {
             Documentation <Icon icon={arrowRight} />
           </Box.Flex>
         </Button.ExternalLink>
-        <Box.Flex marginTop="auto" padding="5" gap="5">
+        <Box.Flex
+          marginTop="auto"
+          padding="5"
+          gap="5"
+          justifyContent="center"
+          className="flex-wrap"
+        >
           <Button.ExternalLink href="#" kind="ghost">
             Netlify docs
           </Button.ExternalLink>

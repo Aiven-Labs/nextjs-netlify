@@ -2,8 +2,7 @@ import React, { PropsWithChildren } from "react";
 import { Navbar } from "../Navbar/Navbar";
 import { Footer } from "../Footer/Footer";
 import Head from "next/head";
-import styles from "./styles.module.css";
-import { Alert } from "@aivenio/aquarium";
+import { Alert, Box } from "@aivenio/aquarium";
 import { useAppContext } from "@/context";
 
 export const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
@@ -21,10 +20,19 @@ export const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <main className={styles.main}>
+      <Box.Flex
+        component="main"
+        flexDirection="column"
+        flex={1}
+        gap="5"
+        padding="5"
+        width="full"
+        maxWidth="4xl"
+        marginX="auto"
+      >
         {alert && <Alert {...alert} />}
         {children}
-      </main>
+      </Box.Flex>
       <Footer />
     </>
   );

@@ -20,6 +20,7 @@ import { useAppContext } from "@/context";
 import { useRecipes } from "@/hooks";
 import Image from "next/image";
 import { formatTimeMinutes, parseNutritionInfo } from "@/utils";
+import { RecipeCard } from "@/components/RecipeCard/RecipeCard";
 
 export default function RecipeDetail() {
   const {
@@ -52,8 +53,8 @@ export default function RecipeDetail() {
         </Button.Ghost>
       </Box.Flex>
       {data && (
-        <Box.Flex justifyContent="space-between" gap="5">
-          <Box flex={1}>
+        <Box.Flex justifyContent="space-between" gap="5" className="flex-wrap">
+          <RecipeCard>
             <Section
               title={data.recipeName}
               actions={[
@@ -80,74 +81,47 @@ export default function RecipeDetail() {
                   alt="Sample image of a recipe."
                 />
                 <Divider />
-                <Box.Flex
-                  gap="5"
-                  style={{
-                    whiteSpace: "nowrap", // Not allowed by Aquarium - need to use inline styles.
-                  }}
-                >
-                  <Box.Flex
-                    flexDirection="column"
-                    justifyContent="space-between"
-                  >
-                    <Typography variant="body-default" fontWeight={600}>
-                      Prep time
-                    </Typography>
-                    <Typography variant="body-default">
+                <Box>
+                  <Box.Flex gap="2">
+                    <Typography.DefaultStrong>
+                      Prep time:
+                    </Typography.DefaultStrong>{" "}
+                    <Typography.Default>
                       {formatTimeMinutes(data.prepTimeMinutes)}
-                    </Typography>
+                    </Typography.Default>
                   </Box.Flex>
-                  <Divider direction="vertical" size={2} />
-                  <Box.Flex
-                    flexDirection="column"
-                    justifyContent="space-between"
-                  >
-                    <Typography variant="body-default" fontWeight={600}>
-                      Cook time
-                    </Typography>
-                    <Typography variant="body-default">
-                      {data.cookTimeMinutes &&
-                        formatTimeMinutes(data.cookTimeMinutes)}
-                    </Typography>
-                  </Box.Flex>
-                  <Divider direction="vertical" size={2} />
-                  <Box.Flex
-                    flexDirection="column"
-                    justifyContent="space-between"
-                  >
-                    <Typography variant="body-default" fontWeight={600}>
-                      Total time
-                    </Typography>
-                    <Typography variant="body-default">
+                  {data.cookTimeMinutes && (
+                    <Box.Flex gap="2">
+                      <Typography.DefaultStrong>
+                        Cook time:
+                      </Typography.DefaultStrong>{" "}
+                      <Typography.Default>
+                        {formatTimeMinutes(data.cookTimeMinutes)}
+                      </Typography.Default>
+                    </Box.Flex>
+                  )}
+                  <Box.Flex gap="2">
+                    <Typography.DefaultStrong>
+                      Total time:
+                    </Typography.DefaultStrong>{" "}
+                    <Typography.Default>
                       {formatTimeMinutes(data.totalTimeMinutes)}
-                    </Typography>
+                    </Typography.Default>
                   </Box.Flex>
-                  <Divider direction="vertical" size={2} />
-                  <Box.Flex
-                    flexDirection="column"
-                    justifyContent="space-between"
-                  >
-                    <Typography variant="body-default" fontWeight={600}>
-                      Servings
-                    </Typography>
-                    <Typography variant="body-default">
-                      {data.servings}
-                    </Typography>
+                  <Box.Flex gap="2">
+                    <Typography.DefaultStrong>
+                      Servings:
+                    </Typography.DefaultStrong>{" "}
+                    <Typography.Default>{data.servings}</Typography.Default>
                   </Box.Flex>
-                </Box.Flex>
+                </Box>
                 <Divider />
                 <Box>
-                  <Typography variant="body-default" fontWeight={600}>
-                    Recipe
-                  </Typography>
-                  <Typography variant="body-default">
-                    {data.directions}
-                  </Typography>
+                  <Typography.DefaultStrong>Recipe</Typography.DefaultStrong>
+                  <Typography.Default>{data.directions}</Typography.Default>
                 </Box>
-                <Box>
-                  <Typography variant="body-default" fontWeight={600}>
-                    Recipe by:
-                  </Typography>
+                <Box style={{ wordWrap: "break-word" }}>
+                  <Typography.DefaultStrong>Recipe by</Typography.DefaultStrong>
                   {data.url ? (
                     <Link href={data.url} target="_blank">
                       {data.url}
@@ -158,28 +132,26 @@ export default function RecipeDetail() {
                 </Box>
               </Box.Flex>
             </Section>
-          </Box>
-          <Box flex={1}>
+          </RecipeCard>
+          <RecipeCard>
             <Section title="Ingredients">
               <Box.Flex flexDirection="column" gap="5">
-                <Typography variant="body-default">
-                  {data.ingredients}
-                </Typography>
+                <Typography.Default>{data.ingredients}</Typography.Default>
                 <Divider />
-                <Typography variant="body-default" fontWeight={600}>
+                <Typography.DefaultStrong>
                   Nutrition facts (per serving)
-                </Typography>
+                </Typography.DefaultStrong>
                 {nutritionData && (
                   <Box>
                     {Object.entries(nutritionData).map(
                       ([key, { unit, value }]) => (
                         <Box.Flex key={key} gap="2">
-                          <Typography variant="body-default" fontWeight={600}>
+                          <Typography.DefaultStrong>
                             {key}:
-                          </Typography>{" "}
-                          <Typography variant="body-default">
+                          </Typography.DefaultStrong>{" "}
+                          <Typography.Default>
                             {value} {unit}
-                          </Typography>
+                          </Typography.Default>
                         </Box.Flex>
                       )
                     )}
@@ -187,7 +159,7 @@ export default function RecipeDetail() {
                 )}
               </Box.Flex>
             </Section>
-          </Box>
+          </RecipeCard>
         </Box.Flex>
       )}
     </Layout>

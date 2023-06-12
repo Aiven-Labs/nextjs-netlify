@@ -5,23 +5,26 @@ import prisma, {
 } from "@/lib/prisma";
 import { REDIS_RECIPE_STATS_KEY } from "@/constants";
 import { createRedisInstance } from "@/lib/ioredis";
+import { Recipe } from "@prisma/client";
+import { ErrorResponse } from "@/types";
 
 const redis = createRedisInstance();
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<Recipe | ErrorResponse>
 ) {
   const id = Number(req.query.recipeId);
 
   if (req.method === "GET") {
     const recipe = await prisma.recipe.findFirst({ where: { id } });
 
-    if (!recipe) {
+    if (recipe) {
+      res.json(recipe);
+    } else {
       res.status(404).json({ message: "Recipe not found." });
     }
 
-    res.json(recipe);
     return;
   }
 

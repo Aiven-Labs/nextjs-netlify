@@ -39,11 +39,14 @@ export const calculateFavoriteStats = async () => {
 
   return {
     favoriteRecipesCount,
-    avgFavoriteServings: avgFavoriteServings?.toFixed(),
-    avgFavoriteRating: avgFavoriteRating?.toFixed(2),
-    avgFavoritePrepTimeMinutes: avgFavoritePrepTimeMinutes?.toFixed(),
-    avgFavoriteCookTimeMinutes: avgFavoriteCookTimeMinutes?.toFixed(),
-    avgFavoriteTotalTimeMinutes: avgFavoriteTotalTimeMinutes?.toFixed(),
+    avgFavoriteServings: Number(avgFavoriteServings?.toFixed()) ?? 0,
+    avgFavoriteRating: Number(avgFavoriteRating?.toFixed(2)) ?? 0,
+    avgFavoritePrepTimeMinutes:
+      Number(avgFavoritePrepTimeMinutes?.toFixed()) ?? 0,
+    avgFavoriteCookTimeMinutes:
+      Number(avgFavoriteCookTimeMinutes?.toFixed()) ?? 0,
+    avgFavoriteTotalTimeMinutes:
+      Number(avgFavoriteTotalTimeMinutes?.toFixed()) ?? 0,
   };
 };
 
@@ -70,10 +73,10 @@ export const calculateTotalStats = async () => {
 
   return {
     totalRecipesCount,
-    avgTotalServings: avgTotalServings?.toFixed(),
-    avgTotalRating: avgTotalRating?.toFixed(2),
-    avgTotalPrepTimeMinutes: avgTotalPrepTimeMinutes?.toFixed(),
-    avgTotalCookTimeMinutes: avgTotalCookTimeMinutes?.toFixed(),
-    avgTotalTotalTimeMinutes: avgTotalTotalTimeMinutes?.toFixed(),
+    avgTotalServings: Number(avgTotalServings?.toFixed()) ?? 0,
+    avgTotalRating: Number(avgTotalRating?.toFixed(2)) ?? 0,
+    avgTotalPrepTimeMinutes: Number(avgTotalPrepTimeMinutes?.toFixed()) ?? 0,
+    avgTotalCookTimeMinutes: Number(avgTotalCookTimeMinutes?.toFixed()) ?? 0,
+    avgTotalTotalTimeMinutes: Number(avgTotalTotalTimeMinutes?.toFixed()) ?? 0,
   };
 };

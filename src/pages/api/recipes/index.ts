@@ -6,12 +6,13 @@ import prisma, {
 } from "@/lib/prisma";
 import { createRedisInstance, getCachedDataFromRedis } from "@/lib/ioredis";
 import { REDIS_RECIPE_STATS_KEY } from "@/constants";
+import { ErrorResponse, RecipesResponse } from "@/types";
 
 const redis = createRedisInstance();
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<RecipesResponse | ErrorResponse>
 ) {
   if (req.method === "GET") {
     const page = Number(req.query.page) || 1;
