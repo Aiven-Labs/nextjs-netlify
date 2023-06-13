@@ -1,24 +1,71 @@
-import { Typography } from "@aivenio/aquarium";
-import Head from "next/head";
+import { Layout } from "@/components/Layout/Layout";
+import { Box, Button, Chip, Icon, Typography } from "@aivenio/aquarium";
+import arrowRight from "@aivenio/aquarium/icons/arrowRight";
 
 export default function Home() {
   return (
-    <>
-      <Head>
-        <title>Recipe library powered by Aiven and Netlify</title>
-        <meta
-          name="description"
-          content="Recipe library built with Next.js, PostgreSQL, Redis, OpenSearch and Netlify"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main>
+    <Layout>
+      <Box.Flex
+        marginTop="l5"
+        flexDirection="column"
+        gap="5"
+        alignItems="center"
+        flex={1}
+        style={{ textAlign: "center" }}
+      >
+        <Box
+          display="flex"
+          gap="3"
+          justifyContent="center"
+          className="flex-wrap"
+        >
+          <Chip text="Aiven for PostgreSQL®" />
+          <Chip text="Aiven for Redis®" />
+        </Box>
         <Typography.LargeHeading>
-          Recipe library built with Next.js and hosted by Netlify. Utilizing
-          Aiven for PostgreSQL, Redis and OpenSearch.
+          Free quickstart app using Next.js, Prisma and Aiven
         </Typography.LargeHeading>
-      </main>
-    </>
+        <Typography.Large color="grey-60">
+          A PostgreSQL and Redis optimized React application built with Aiven,
+          Prisma, Netlify, with open source data - for free.
+        </Typography.Large>
+        <Box.Flex gap="5" justifyContent="center" className="flex-wrap">
+          <Button.ExternalLink href="#">Deploy to Netlify</Button.ExternalLink>
+          <Button.ExternalLink
+            href="https://github.com/aiven/nextjs-netlify"
+            kind="secondary"
+            target="_blank"
+          >
+            Star on GitHub
+          </Button.ExternalLink>
+        </Box.Flex>
+        <Button.ExternalLink href="#" kind="ghost">
+          <Box.Flex alignItems="center" gap="2">
+            Documentation <Icon icon={arrowRight} />
+          </Box.Flex>
+        </Button.ExternalLink>
+        <Box.Flex
+          marginTop="auto"
+          padding="5"
+          gap="5"
+          justifyContent="center"
+          className="flex-wrap"
+        >
+          <Button.ExternalLink href="#" kind="ghost">
+            Netlify docs
+          </Button.ExternalLink>
+          <Button.ExternalLink href="#" kind="ghost">
+            Aiven docs
+          </Button.ExternalLink>
+          <Button.ExternalLink
+            href="https://www.kaggle.com/datasets/thedevastator/better-recipes-for-a-better-life"
+            kind="ghost"
+            target="_blank"
+          >
+            Data source
+          </Button.ExternalLink>
+        </Box.Flex>
+      </Box.Flex>
+    </Layout>
   );
 }

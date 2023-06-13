@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Make the table pagination responsive with the layout. */
+.Aquarium-Pagination {
+  display: flex;
+}
+
+/* Utility classes. */
+.flex-wrap {
+  flex-flow: wrap;
+}
