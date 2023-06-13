@@ -4,11 +4,9 @@ import prisma, {
   calculateTotalStats,
 } from "@/lib/prisma";
 import { REDIS_RECIPE_STATS_KEY } from "@/constants";
-import { createRedisInstance } from "@/lib/ioredis";
+import redis from "@/lib/ioredis";
 import { Recipe } from "@prisma/client";
 import { ErrorResponse } from "@/types";
-
-const redis = createRedisInstance();
 
 export default async function handler(
   req: NextApiRequest,

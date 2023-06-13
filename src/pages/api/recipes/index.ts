@@ -1,14 +1,7 @@
 import { DEFAULT_PAGE_SIZE } from "@/constants";
 import type { NextApiRequest, NextApiResponse } from "next";
-import prisma, {
-  calculateFavoriteStats,
-  calculateTotalStats,
-} from "@/lib/prisma";
-import { createRedisInstance, getCachedDataFromRedis } from "@/lib/ioredis";
-import { REDIS_RECIPE_STATS_KEY } from "@/constants";
+import prisma from "@/lib/prisma";
 import { ErrorResponse, RecipesResponse } from "@/types";
-
-const redis = createRedisInstance();
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,6 +9,7 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     const page = Number(req.query.page) || 1;
+    const startTime = process.hrtime();
 
     const recipes = await prisma.recipe.findMany({
       skip: DEFAULT_PAGE_SIZE * (page - 1),
@@ -32,56 +26,13 @@ export default async function handler(
       ],
     });
 
-    let totalStats: Awaited<ReturnType<typeof calculateTotalStats>>;
-    let favoriteStats: Awaited<ReturnType<typeof calculateFavoriteStats>>;
-    let recipeStatsCacheRetrievalTimeMs;
+    const endTime = process.hrtime(startTime);
 
-    // If Redis is available, retrieve cache for recipe stats and update the cache if it has not been populated.
-    // Sometimes the redis instance might have a status of "connecting", which still allows querying the database.
-    if (redis?.status === "ready" || redis?.status === "connecting") {
-      const {
-        result: recipeStatsCache,
-        executionTime: totalStatsExecutionTime,
-      } = await getCachedDataFromRedis({
-        redis,
-        key: REDIS_RECIPE_STATS_KEY,
-      });
+    const endToEndRetrievalTimeMs = Number(
+      (endTime[0] * 1000 + endTime[1] / 1000000).toFixed(2)
+    );
 
-      if (!recipeStatsCache) {
-        totalStats = await calculateTotalStats();
-        favoriteStats = await calculateFavoriteStats();
-
-        await redis.set(
-          REDIS_RECIPE_STATS_KEY,
-          JSON.stringify({ totalStats, favoriteStats })
-        );
-      } else {
-        recipeStatsCacheRetrievalTimeMs = totalStatsExecutionTime;
-        ({ totalStats, favoriteStats } = JSON.parse(recipeStatsCache));
-      }
-    } else {
-      totalStats = await calculateTotalStats();
-      favoriteStats = await calculateFavoriteStats();
-    }
-
-    const {
-      totalRecipesCount,
-      avgTotalServings,
-      avgTotalRating,
-      avgTotalPrepTimeMinutes,
-      avgTotalCookTimeMinutes,
-      avgTotalTotalTimeMinutes,
-    } = totalStats;
-
-    const {
-      favoriteRecipesCount,
-      avgFavoriteServings,
-      avgFavoriteRating,
-      avgFavoritePrepTimeMinutes,
-      avgFavoriteCookTimeMinutes,
-      avgFavoriteTotalTimeMinutes,
-    } = favoriteStats;
-
+    const totalRecipesCount = await prisma.recipe.count();
     const totalPages = Math.ceil(totalRecipesCount / DEFAULT_PAGE_SIZE);
     const resultsBeforeCurrentPage = DEFAULT_PAGE_SIZE * (page - 1);
     const resultsAfterCurrentPage =
@@ -90,30 +41,12 @@ export default async function handler(
     const hasNextPage = resultsAfterCurrentPage > 0;
 
     res.json({
-      statistics: {
-        total: {
-          totalRecipesCount,
-          avgTotalServings,
-          avgTotalRating,
-          avgTotalPrepTimeMinutes,
-          avgTotalCookTimeMinutes,
-          avgTotalTotalTimeMinutes,
-        },
-        favorite: {
-          favoriteRecipesCount,
-          avgFavoriteServings,
-          avgFavoriteRating,
-          avgFavoritePrepTimeMinutes,
-          avgFavoriteCookTimeMinutes,
-          avgFavoriteTotalTimeMinutes,
-        },
-        recipeStatsCacheRetrievalTimeMs,
-      },
       recipes,
       page,
       totalPages,
       hasPreviousPage,
       hasNextPage,
+      endToEndRetrievalTimeMs,
     });
 
     return;
