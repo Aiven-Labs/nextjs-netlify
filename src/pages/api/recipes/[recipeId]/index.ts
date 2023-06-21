@@ -1,37 +1,33 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import prisma, {
-  calculateFavoriteStats,
-  calculateTotalStats,
-} from "@/lib/prisma";
-import { REDIS_RECIPE_STATS_KEY } from "@/constants";
-import redis from "@/lib/ioredis";
-import { Recipe } from "@prisma/client";
-import { ErrorResponse } from "@/types";
+import { Recipe } from '@prisma/client';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Recipe | ErrorResponse>
-) {
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+import { REDIS_RECIPE_STATS_KEY } from '@/constants';
+import redis from '@/lib/ioredis';
+import prisma, { calculateFavoriteStats, calculateTotalStats } from '@/lib/prisma';
+import { ErrorResponse } from '@/types';
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse<ErrorResponse | Recipe>) {
   const id = Number(req.query.recipeId);
 
-  if (req.method === "GET") {
+  if (req.method === 'GET') {
     try {
       const recipe = await prisma.recipe.findFirst({ where: { id } });
 
       if (recipe) {
         res.json(recipe);
       } else {
-        res.status(404).json({ message: "Recipe not found." });
+        res.status(404).json({ message: 'Recipe not found.' });
       }
 
       return;
     } catch {
-      res.status(500).json({ message: "Failed to fetch recipe." });
+      res.status(500).json({ message: 'Failed to fetch recipe.' });
       return;
     }
   }
 
-  if (req.method === "PATCH") {
+  if (req.method === 'PATCH') {
     const body = JSON.parse(req.body);
     const isFavorite = Boolean(body.isFavorite);
 
@@ -42,7 +38,7 @@ export default async function handler(
       });
 
       // If redis instance is available, update cache for favorite stats.
-      if (redis?.status === "ready" || redis?.status === "connecting") {
+      if (redis?.status === 'ready' || redis?.status === 'connecting') {
         const recipeStatsCache = await redis.get(REDIS_RECIPE_STATS_KEY);
         let totalStats;
 
@@ -54,23 +50,20 @@ export default async function handler(
 
         const favoriteStats = await calculateFavoriteStats();
 
-        await redis.set(
-          REDIS_RECIPE_STATS_KEY,
-          JSON.stringify({ totalStats, favoriteStats })
-        );
+        await redis.set(REDIS_RECIPE_STATS_KEY, JSON.stringify({ totalStats, favoriteStats }));
       }
 
       if (!recipe) {
-        res.status(404).json({ message: "Recipe not found." });
+        res.status(404).json({ message: 'Recipe not found.' });
       }
 
       res.json(recipe);
       return;
     } catch {
-      res.status(500).json({ message: "Failed to update recipe." });
+      res.status(500).json({ message: 'Failed to update recipe.' });
       return;
     }
   }
 
-  res.status(405).json({ message: "Method not allowed." });
+  res.status(405).json({ message: 'Method not allowed.' });
 }

@@ -1,13 +1,23 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 let prisma: PrismaClient;
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === 'production') {
   prisma = new PrismaClient();
 } else {
+  /*
+   * Ignore: Set prisma to the global object to prevent serverless functions from creating excessive amounts of DB connections.
+   * However, we don't want to type the global namespace to contain the Prisma instance since we always want to import it from here.
+   */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   if (!global.prisma) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     global.prisma = new PrismaClient();
   }
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   prisma = global.prisma;
 }
 
@@ -41,12 +51,9 @@ export const calculateFavoriteStats = async () => {
     favoriteRecipesCount,
     avgFavoriteServings: Number(avgFavoriteServings?.toFixed()) ?? 0,
     avgFavoriteRating: Number(avgFavoriteRating?.toFixed(2)) ?? 0,
-    avgFavoritePrepTimeMinutes:
-      Number(avgFavoritePrepTimeMinutes?.toFixed()) ?? 0,
-    avgFavoriteCookTimeMinutes:
-      Number(avgFavoriteCookTimeMinutes?.toFixed()) ?? 0,
-    avgFavoriteTotalTimeMinutes:
-      Number(avgFavoriteTotalTimeMinutes?.toFixed()) ?? 0,
+    avgFavoritePrepTimeMinutes: Number(avgFavoritePrepTimeMinutes?.toFixed()) ?? 0,
+    avgFavoriteCookTimeMinutes: Number(avgFavoriteCookTimeMinutes?.toFixed()) ?? 0,
+    avgFavoriteTotalTimeMinutes: Number(avgFavoriteTotalTimeMinutes?.toFixed()) ?? 0,
   };
 };
 

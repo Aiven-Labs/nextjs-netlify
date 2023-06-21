@@ -1,13 +1,16 @@
-import { Prisma, PrismaClient } from "@prisma/client";
-import { createReadStream } from "fs";
-import { parse } from "csv-parse";
-import { join } from "path";
-import { cwd } from "process";
+import { createReadStream } from 'fs';
+import { join } from 'path';
+import { cwd } from 'process';
+
+import { Prisma, PrismaClient } from '@prisma/client';
+import { parse } from 'csv-parse';
 
 const prisma = new PrismaClient();
 
-// Normalize the string representations of prep time, cook time & total time to a numeric minute format for further aggregation.
-// A better way to do this would be to define a trigger in the database but Prisma does unfortunately support those.
+/*
+ * Normalize the string representations of prep time, cook time & total time to a numeric minute format for further aggregation.
+ * A better way to do this would be to define a trigger in the database but Prisma does unfortunately support those.
+ */
 const getTimeMinutes = (time: string) => {
   let days = 0;
   let hours = 0;
@@ -36,9 +39,9 @@ const getTimeMinutes = (time: string) => {
 async function main() {
   const rows: Prisma.RecipeCreateManyInput[] = [];
 
-  createReadStream(join(cwd(), "recipes.csv"))
-    .pipe(parse({ delimiter: ",", from_line: 2 }))
-    .on("data", async (row) => {
+  createReadStream(join(cwd(), 'recipes.csv'))
+    .pipe(parse({ delimiter: ',', from_line: 2 }))
+    .on('data', async (row) => {
       const [
         _id, // Omit the "id" property, because they are not unique in the dataset.
         recipeName,
@@ -75,10 +78,12 @@ async function main() {
         nutrition,
       });
     })
-    .on("end", () => {
-      console.log("Finished loading recipes!");
+    .on('end', () => {
+      // eslint-disable-next-line no-console
+      console.log('Finished loading recipes!');
     })
-    .on("error", (error) => {
+    .on('error', (error) => {
+      // eslint-disable-next-line no-console
       console.log(error.message);
     });
 
@@ -92,6 +97,7 @@ main()
     await prisma.$disconnect();
   })
   .catch(async (e) => {
+    // eslint-disable-next-line no-console
     console.error(e);
     await prisma.$disconnect();
     process.exit(1);

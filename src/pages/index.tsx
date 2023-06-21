@@ -1,6 +1,7 @@
-import { Layout } from "@/components/Layout/Layout";
-import { Box, Button, Chip, Icon, Typography } from "@aivenio/aquarium";
-import arrowRight from "@aivenio/aquarium/icons/arrowRight";
+import { Box, Button, Chip, Icon, Typography } from '@aivenio/aquarium';
+import arrowRight from '@aivenio/aquarium/icons/arrowRight';
+
+import { Layout } from '@/components/Layout/Layout';
 
 export default function Home() {
   return (
@@ -11,31 +12,20 @@ export default function Home() {
         gap="5"
         alignItems="center"
         flex={1}
-        style={{ textAlign: "center" }}
+        style={{ textAlign: 'center' }}
       >
-        <Box
-          display="flex"
-          gap="3"
-          justifyContent="center"
-          className="flex-wrap"
-        >
+        <Box display="flex" gap="3" justifyContent="center" className="flex-wrap">
           <Chip text="Aiven for PostgreSQL®" />
           <Chip text="Aiven for Redis®" />
         </Box>
-        <Typography.LargeHeading>
-          Free quickstart app using Next.js, Prisma and Aiven
-        </Typography.LargeHeading>
+        <Typography.LargeHeading>Free quickstart app using Next.js, Prisma and Aiven</Typography.LargeHeading>
         <Typography.Large color="grey-60">
-          A PostgreSQL and Redis optimized React application built with Aiven,
-          Prisma, Netlify, with open source data - for free.
+          A PostgreSQL and Redis optimized React application built with Aiven, Prisma, Netlify, with open source data -
+          for free.
         </Typography.Large>
         <Box.Flex gap="5" justifyContent="center" className="flex-wrap">
           <Button.ExternalLink href="#">Deploy to Netlify</Button.ExternalLink>
-          <Button.ExternalLink
-            href="https://github.com/aiven/nextjs-netlify"
-            kind="secondary"
-            target="_blank"
-          >
+          <Button.ExternalLink href="https://github.com/aiven/nextjs-netlify" kind="secondary" target="_blank">
             Star on GitHub
           </Button.ExternalLink>
         </Box.Flex>
@@ -44,13 +34,7 @@ export default function Home() {
             Documentation <Icon icon={arrowRight} />
           </Box.Flex>
         </Button.ExternalLink>
-        <Box.Flex
-          marginTop="auto"
-          padding="5"
-          gap="5"
-          justifyContent="center"
-          className="flex-wrap"
-        >
+        <Box.Flex marginTop="auto" padding="5" gap="5" justifyContent="center" className="flex-wrap">
           <Button.ExternalLink href="#" kind="ghost">
             Netlify docs
           </Button.ExternalLink>

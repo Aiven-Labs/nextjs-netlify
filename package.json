@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "prisma migrate reset --force && prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint --ext=.ts,.tsx,.js . && prettier --check '**/*.{ts,tsx,js,json,css}'",
+    "format": "prettier --write '**/*.{ts,tsx,js,json,css}' && eslint --fix --ext=.ts,.tsx,.js ."
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -28,7 +29,12 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@aivenio/eslint-config-aiven": "^4.0.2",
     "csv-parse": "^5.4.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "prisma": "^4.15.0",
     "ts-node": "^10.9.1"
   }

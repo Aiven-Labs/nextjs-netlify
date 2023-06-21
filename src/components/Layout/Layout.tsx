@@ -1,11 +1,12 @@
-import React, { PropsWithChildren } from "react";
-import { Navbar } from "../Navbar/Navbar";
-import { Footer } from "../Footer/Footer";
-import Head from "next/head";
-import { Alert, Box } from "@aivenio/aquarium";
-import { useAppContext } from "@/context";
+import React, { ReactNode } from 'react';
+import { Alert, Box } from '@aivenio/aquarium';
+import Head from 'next/head';
 
-export const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
+import { Footer } from '@/components/Footer/Footer';
+import { Navbar } from '@/components/Navbar/Navbar';
+import { useAppContext } from '@/context';
+
+export const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { alert } = useAppContext();
 
   return (

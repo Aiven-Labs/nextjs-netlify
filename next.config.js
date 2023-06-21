@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: false,
   experimental: {
     esmExternals: false,
-  }
-}
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

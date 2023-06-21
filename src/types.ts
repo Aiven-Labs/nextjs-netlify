@@ -1,4 +1,4 @@
-import { Recipe } from "@prisma/client";
+import { Recipe } from '@prisma/client';
 
 export type ErrorResponse = { message: string };
 

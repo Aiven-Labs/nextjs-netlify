@@ -1,4 +1,4 @@
-import { useAppContext } from "./context";
+import { useAppContext } from './context';
 
 export const useRecipes = () => {
   const { setAlert, setAddingRecipeIdToFavorites } = useAppContext();
@@ -17,15 +17,15 @@ export const useRecipes = () => {
 
     const handleError = () => {
       setAlert({
-        type: "error",
-        title: "Error while adding recipe to favorites.",
+        type: 'error',
+        title: 'Error while adding recipe to favorites.',
         onDismiss: () => setAlert(null),
       });
     };
 
     try {
       const res = await fetch(`/api/recipes/${id}`, {
-        method: "PATCH",
+        method: 'PATCH',
         body: JSON.stringify({ isFavorite }),
       });
 

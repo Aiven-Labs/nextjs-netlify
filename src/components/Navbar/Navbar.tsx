@@ -1,9 +1,10 @@
-import React from "react";
-import Image from "next/image";
-import styles from "./styles.module.css";
-import { Box, Button, Link } from "@aivenio/aquarium";
-import { useRouter } from "next/router";
-import { NavLink } from "../NavLink/NavLink";
+import { Box, Button, Link } from '@aivenio/aquarium';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+
+import styles from './styles.module.css';
+
+import { NavLink } from '@/components/NavLink/NavLink';
 
 export const Navbar: React.FC = () => {
   const { pathname } = useRouter();
@@ -14,10 +15,10 @@ export const Navbar: React.FC = () => {
         <Image src="/logo.svg" width={150} height={50} alt="Aiven logo" />
       </Link>
       <Box marginLeft="5" display="flex" gap="5">
-        <NavLink href="/" active={pathname === "/"}>
+        <NavLink href="/" active={pathname === '/'}>
           Home
         </NavLink>
-        <NavLink href="/recipes" active={pathname === "/recipes"}>
+        <NavLink href="/recipes" active={pathname === '/recipes'}>
           Recipes
         </NavLink>
       </Box>

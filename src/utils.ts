@@ -3,18 +3,18 @@ export const formatTimeMinutes = (minutes = 0) => {
   const hours = Math.floor((minutes % (24 * 60)) / 60);
   const remainingMinutes = minutes % 60;
 
-  let timeString = "";
+  let timeString = '';
 
   if (days > 0) {
-    timeString += `${days} day${days > 1 ? "s" : ""} `;
+    timeString += `${days} day${days > 1 ? 's' : ''} `;
   }
 
   if (hours > 0) {
-    timeString += `${hours} hr${hours > 1 ? "s" : ""} `;
+    timeString += `${hours} hr${hours > 1 ? 's' : ''} `;
   }
 
   if (remainingMinutes > 0) {
-    timeString += `${remainingMinutes} min${remainingMinutes > 1 ? "s" : ""}`;
+    timeString += `${remainingMinutes} min${remainingMinutes > 1 ? 's' : ''}`;
   }
 
   return timeString.trim();
@@ -22,12 +22,10 @@ export const formatTimeMinutes = (minutes = 0) => {
 
 // Construct the nutrition string value to an object for visualization.
 export const parseNutritionInfo = (nutrition: string) => {
-  const infoArray = nutrition.split(", ");
-  const nutritionData: Record<string, { value: number; unit: string | null }> =
-    {};
+  const infoArray = nutrition.split(', ');
+  const nutritionData: Record<string, { value: number; unit: string | null }> = {};
 
-  for (let i = 0; i < infoArray.length; i++) {
-    const info = infoArray[i];
+  for (const info of infoArray) {
     const matches = info.match(/([A-Za-z\s]+)\s([\d.]+)\s?(\w+)?/);
 
     if (matches) {
