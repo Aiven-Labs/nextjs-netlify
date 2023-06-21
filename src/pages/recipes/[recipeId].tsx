@@ -35,12 +35,14 @@ export default function RecipeDetail() {
     data,
     isLoading,
     error,
-    mutate: refetchRecipe,
+    mutate: mutateRecipe,
   } = useSWR<Recipe, ErrorResponse>(
     recipeId ? `/api/recipes/${recipeId}` : null,
-    fetcher
+    fetcher,
+    { errorRetryCount: 0 }
   );
 
+  const refetchRecipe = () => mutateRecipe();
   const nutritionData = data?.nutrition && parseNutritionInfo(data?.nutrition);
 
   return (

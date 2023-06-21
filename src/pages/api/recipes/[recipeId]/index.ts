@@ -15,51 +15,61 @@ export default async function handler(
   const id = Number(req.query.recipeId);
 
   if (req.method === "GET") {
-    const recipe = await prisma.recipe.findFirst({ where: { id } });
+    try {
+      const recipe = await prisma.recipe.findFirst({ where: { id } });
 
-    if (recipe) {
-      res.json(recipe);
-    } else {
-      res.status(404).json({ message: "Recipe not found." });
+      if (recipe) {
+        res.json(recipe);
+      } else {
+        res.status(404).json({ message: "Recipe not found." });
+      }
+
+      return;
+    } catch {
+      res.status(500).json({ message: "Failed to fetch recipe." });
+      return;
     }
-
-    return;
   }
 
   if (req.method === "PATCH") {
     const body = JSON.parse(req.body);
     const isFavorite = Boolean(body.isFavorite);
 
-    const recipe = await prisma.recipe.update({
-      where: { id },
-      data: { isFavorite },
-    });
+    try {
+      const recipe = await prisma.recipe.update({
+        where: { id },
+        data: { isFavorite },
+      });
 
-    // If redis instance is available, update cache for favorite stats.
-    if (redis?.status === "ready" || redis?.status === "connecting") {
-      const recipeStatsCache = await redis.get(REDIS_RECIPE_STATS_KEY);
-      let totalStats;
+      // If redis instance is available, update cache for favorite stats.
+      if (redis?.status === "ready" || redis?.status === "connecting") {
+        const recipeStatsCache = await redis.get(REDIS_RECIPE_STATS_KEY);
+        let totalStats;
 
-      if (recipeStatsCache) {
-        ({ totalStats } = JSON.parse(recipeStatsCache));
-      } else {
-        totalStats = await calculateTotalStats();
+        if (recipeStatsCache) {
+          ({ totalStats } = JSON.parse(recipeStatsCache));
+        } else {
+          totalStats = await calculateTotalStats();
+        }
+
+        const favoriteStats = await calculateFavoriteStats();
+
+        await redis.set(
+          REDIS_RECIPE_STATS_KEY,
+          JSON.stringify({ totalStats, favoriteStats })
+        );
       }
 
-      const favoriteStats = await calculateFavoriteStats();
+      if (!recipe) {
+        res.status(404).json({ message: "Recipe not found." });
+      }
 
-      await redis.set(
-        REDIS_RECIPE_STATS_KEY,
-        JSON.stringify({ totalStats, favoriteStats })
-      );
+      res.json(recipe);
+      return;
+    } catch {
+      res.status(500).json({ message: "Failed to update recipe." });
+      return;
     }
-
-    if (!recipe) {
-      res.status(404).json({ message: "Recipe not found." });
-    }
-
-    res.json(recipe);
-    return;
   }
 
   res.status(405).json({ message: "Method not allowed." });

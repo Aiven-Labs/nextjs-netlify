@@ -32,18 +32,27 @@ export default function Recipes() {
     data: recipeStatsData,
     isLoading: recipeStatsLoading,
     error: recipeStatsError,
-    mutate: refetchRecipeStats,
-  } = useSWR<RecipeStatsResponse, ErrorResponse>("/api/recipes/stats", fetcher);
+    mutate: mutateRecipeStats,
+  } = useSWR<RecipeStatsResponse | undefined, ErrorResponse>(
+    "/api/recipes/stats",
+    fetcher,
+    { errorRetryCount: 0 }
+  );
+
+  const refetchRecipeStats = () => mutateRecipeStats();
 
   const {
     data: recipesData,
     isLoading: recipesLoading,
     error: recipesError,
-    mutate: refetchRecipes,
-  } = useSWR<RecipesResponse, ErrorResponse>(
+    mutate: mutateRecipes,
+  } = useSWR<RecipesResponse | undefined, ErrorResponse>(
     `/api/recipes?page=${page}`,
-    fetcher
+    fetcher,
+    { errorRetryCount: 0 }
   );
+
+  const refetchRecipes = () => mutateRecipes();
 
   const rows =
     recipesData?.recipes.map(
