@@ -30,10 +30,12 @@ Follow the instructions below to create your free PostgreSQL and Redis services 
 
 1. Select **Free** plan.
 1. Click **Create free service**.
+1. Install the [GitHub CLI](https://github.com/cli/cli#installation).
+1. Install the [Netlify CLI](https://docs.netlify.com/cli/get-started/).
 
 # Step 2. Get the application code
 
-To deploy the application to Netlify you'll need to have your own GitHub repository for [aiven/nextjs-netlify](https://github.com/aiven/nextjs-netlify). If you have the [GitHub CLI](https://github.com/cli/cli#installation) installed, you can simply follow the instructions below to fork the repository. Otherwise, see the relevant [GitHub instructions](https://docs.github.com/en/get-started/quickstart/fork-a-repo?tool=webui#forking-a-repository).
+To deploy the application to Netlify you'll need to have your own GitHub repository for [aiven/nextjs-netlify](https://github.com/aiven/nextjs-netlify). See the relevant [GitHub CLI instructions to fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo?tool=webui#forking-a-repository).
 
 
 Fork and clone the forked repository with GitHub CLI
@@ -48,10 +50,10 @@ You can name the repository by adding `--fork-name <name>` to the command.
 
 Follow the instructions below to configure continuous deployment. This will automatically deploy your changes. Make sure to run the commands in the root directory of the repository.
 
-1. Install Netlify CLI:
+1. Navigate to the `nextjs-netlify` directory on your local machine:
 
     ```
-    npm install netlify-cli -g
+    cd nextjs-netlify
     ```
 
 1. Sign into your Netlify account to obtain the access token:
@@ -62,7 +64,7 @@ Follow the instructions below to configure continuous deployment. This will auto
 
 1. Configure continuous deployment:
 
-    Start and follow the automated setup process. Choose to create a new site, and then select the default options other prompts. Note that you will be required to authorize Netlify with GitHub.
+    Start and follow the automated setup process. Choose to create a new site, and then select the default options other prompts. Note that you will be required to authorize Netlify with GitHub. You can do so either through app.netlify.com or with a GitHub personal access token.
 
     ```
     netlify init
@@ -125,4 +127,6 @@ Aiven for PostgreSQL is used as the database for storing all recipes and whether
 # For more information, see
 
 * [Aiven documentation](docs.aiven.io)
+* [Aiven for PostgreSQL documentation](https://docs.aiven.io/docs/products/postgresql)
+* [Aiven for Redis documentation](https://docs.aiven.io/docs/products/redis)
 * [Netlify CLI Command list](https://cli.netlify.com/)
