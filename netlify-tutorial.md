@@ -48,7 +48,7 @@ You can name the repository by adding `--fork-name <name>` to the command.
 
 # Step 3. Deploy the application
 
-Follow the instructions below to configure continuous deployment. This will automatically deploy your changes. Make sure to run the commands in the root directory of the repository.
+Follow the instructions below to configure continuous deployment. This will automatically deploy your changes.
 
 1. Navigate to the `nextjs-netlify` directory on your local machine:
 
