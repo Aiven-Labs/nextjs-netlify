@@ -35,7 +35,7 @@ Follow the instructions below to create your free PostgreSQL and Redis services 
 
 # Step 2. Get the application code
 
-To deploy the application to Netlify you'll need to have your own GitHub repository for [aiven/nextjs-netlify](https://github.com/aiven/nextjs-netlify). See the relevant [GitHub CLI instructions to fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo?tool=webui#forking-a-repository).
+To deploy the application to Netlify you'll need to have your own GitHub repository for [aiven/nextjs-netlify](https://github.com/aiven/nextjs-netlify). See the relevant [GitHub CLI instructions to fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo?tool=cli#forking-a-repository).
 
 
 Fork and clone the forked repository with GitHub CLI
