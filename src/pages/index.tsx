@@ -24,10 +24,13 @@ export default function Home() {
         A PostgreSQL and Redis optimized Next.js application built with Aiven, Prisma and open source data - for free.
       </Typography.Large>
       <Box.Flex gap="5" justifyContent="center" className="flex-wrap">
-        <Button.ExternalLink href="https://github.com/aiven/nextjs-netlify" target="_blank">
+        <Button.ExternalLink
+          href="https://app.netlify.com/start/deploy?repository=https://github.com/Aiven-Labs/nextjs-netlify"
+          target="_blank"
+        >
           Deploy to Netlify
         </Button.ExternalLink>
-        <Button.ExternalLink href="https://github.com/aiven/nextjs-netlify" kind="secondary" target="_blank">
+        <Button.ExternalLink href="https://github.com/Aiven-Labs/nextjs-netlify" kind="secondary" target="_blank">
           Star on GitHub
         </Button.ExternalLink>
       </Box.Flex>

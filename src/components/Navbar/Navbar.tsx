@@ -23,7 +23,7 @@ export const Navbar: React.FC = () => {
         </NavLink>
       </Box>
       <Box marginLeft="auto" className={styles.netlifyDeployButton}>
-        <Button.ExternalLink href="https://github.com/aiven/nextjs-netlify" target="_blank">
+        <Button.ExternalLink href="https://app.netlify.com/start/deploy?repository=https://github.com/Aiven-Labs/nextjs-netlify" target="_blank">
           Deploy to Netlify
         </Button.ExternalLink>
       </Box>

@@ -4,7 +4,7 @@ This tutorial guides you through deploying a [Netlify](https://www.netlify.com/)
 
 The sample application used in this tutorial is a cooking recipe library displaying open source [recipe data](https://www.kaggle.com/datasets/thedevastator/better-recipes-for-a-better-life). It's built in [Next.js](https://nextjs.org/), which can be deployed to Netlify with ease, and connects to PostgreSQL with [Prisma](https://www.prisma.io/) and Redis with [ioredis](https://www.npmjs.com/package/ioredis).
 
-The source code for the application is available on GitHub at https://github.com/aiven/nextjs-netlify.
+The source code for the application is available on GitHub at https://github.com/Aiven-Labs/nextjs-netlify.
 
 # Before you begin
 
@@ -33,13 +33,13 @@ Follow the instructions below to create your free PostgreSQL and Redis services 
 
 # Step 2. Get the application code
 
-To deploy the application to Netlify you'll need to have your own GitHub repository for [aiven/nextjs-netlify](https://github.com/aiven/nextjs-netlify). If you have the [GitHub CLI](https://github.com/cli/cli#installation) installed, you can simply follow the instructions below to fork the repository. Otherwise, see the relevant [GitHub instructions](https://docs.github.com/en/get-started/quickstart/fork-a-repo?tool=webui#forking-a-repository).
+To deploy the application to Netlify you'll need to have your own GitHub repository for [Aiven-Labs/nextjs-netlify](https://github.com/Aiven-Labs/nextjs-netlify). If you have the [GitHub CLI](https://github.com/cli/cli#installation) installed, you can simply follow the instructions below to fork the repository. Otherwise, see the relevant [GitHub instructions](https://docs.github.com/en/get-started/quickstart/fork-a-repo?tool=webui#forking-a-repository).
 
 
 Fork and clone the forked repository with GitHub CLI
 
 ```
-gh repo fork https://github.com/aiven/nextjs-netlify.git --clone --remote
+gh repo fork https://github.com/Aiven-Labs/nextjs-netlify.git --clone --remote
 ```
 
 You can name the repository by adding `--fork-name <name>` to the command.

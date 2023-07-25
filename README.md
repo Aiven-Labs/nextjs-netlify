@@ -23,7 +23,7 @@ Get free PostgreSQL and Redis from [Aiven](https://console.aiven.io).
 
 You can fork this branch and deploy the application immediately to Netlify by clicking the button below. Database migrations and seed is done during the Netlify deployment process. Make sure you have PostgreSQL database up and running when deploying to achieve working environment on the first try.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/aiven/nextjs-netlify)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Aiven-Labs/nextjs-netlify)
 
 ## Development setup
 
@@ -49,7 +49,7 @@ Netlify deployment
 
 You can fork this branch and deploy the application immediately to Netlify by clicking the button below. Database migrations and seed is done during the Netlify deployment process. Make sure you have PostgreSQL database up and running when deploying to achieve working environment on the first try.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/aiven/nextjs-netlify)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Aiven-Labs/nextjs-netlify)
 
 ## Setup automatic deployment manually
 
@@ -74,4 +74,4 @@ Please note that the project explicitly does not require a CLA (Contributor Lice
 
 Contact
 ============
-Bug reports and patches are very welcome, please post them as GitHub issues and pull requests at https://github.com/aiven/nextjs-netlify.
+Bug reports and patches are very welcome, please post them as GitHub issues and pull requests at https://github.com/Aiven-Labs/nextjs-netlify.
