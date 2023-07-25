@@ -126,7 +126,7 @@ Aiven for PostgreSQL is used as the database for storing all recipes and whether
 
 # For more information, see
 
-* [Aiven documentation](docs.aiven.io)
+* [Aiven documentation](https://docs.aiven.io)
 * [Aiven for PostgreSQL documentation](https://docs.aiven.io/docs/products/postgresql)
 * [Aiven for Redis documentation](https://docs.aiven.io/docs/products/redis)
 * [Netlify CLI Command list](https://cli.netlify.com/)
