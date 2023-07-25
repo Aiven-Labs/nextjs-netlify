@@ -8,10 +8,10 @@ The source code for the application is available on GitHub at https://github.com
 
 # Before you begin
 
-Before starting the tutorial, do the following:
+Before starting the tutorial, do the following if you haven't already:
 
-1. If you haven't already, sign up to [Aiven](https://console.aiven.io/signup).
-1. If you haven't already, sign up to [Netlify](https://app.netlify.com/signup).
+1. Sign up to [Aiven](https://console.aiven.io/signup).
+1. Sign up to [Netlify](https://app.netlify.com/signup).
 1. Install the [GitHub CLI](https://github.com/cli/cli#installation).
 1. Install the [Netlify CLI](https://docs.netlify.com/cli/get-started/).
 
@@ -64,7 +64,7 @@ Follow the instructions below to configure continuous deployment. This will auto
 
 1. Configure continuous deployment:
 
-    Start and follow the automated setup process. Choose to create a new site, and then select the default options other prompts. Note that you will be required to authorize Netlify with GitHub. You can do so either through app.netlify.com or with a GitHub personal access token.
+    Start and follow the automated setup process. Choose to create a new site, and then select the default options for other prompts. Note that you will be required to authorize Netlify with GitHub. You can do so either through app.netlify.com or with a GitHub personal access token.
 
     ```
     netlify init
