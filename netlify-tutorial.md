@@ -6,7 +6,7 @@ The sample application used in this tutorial is a cooking recipe library display
 
 The source code for the application is available on GitHub at https://github.com/Aiven-Labs/nextjs-netlify.
 
-# Before you begin
+## Before you begin
 
 Before starting the tutorial, do the following if you haven't already:
 
@@ -15,38 +15,40 @@ Before starting the tutorial, do the following if you haven't already:
 1. Install the [GitHub CLI](https://github.com/cli/cli#installation).
 1. Install the [Netlify CLI](https://docs.netlify.com/cli/get-started/).
 
-# Step 1. Create free PostgreSQL and Redis services
+## Create free PostgreSQL and Redis services
 
-Follow the instructions below to create your free PostgreSQL and Redis services with Aiven. You can read more about the Aiven free plans in the [Aiven documentation](https://docs.aiven.io/docs/platform/concepts/free-plan).
+Follow the instructions below to create your free Aiven for PostgreSQL and Aiven for Redis services. You can read more about the Aiven free plans in the [Aiven documentation](https://docs.aiven.io/docs/platform/concepts/free-plan).
 
-1. Login to [Aiven Console](https://console.aiven.io).
-1. In the project you want to create a service in, go to **Services**.
+1. Login to the [Aiven Console](https://console.aiven.io).
+1. Choose the project you want your service to be in.
 1. On the **Services** page, click **Create service**.
 1. Select the service you want to create, either **PostgreSQL** or **Redis**.
 1. Select **AWS** as the cloud provider and choose the region.
 
-    We recommend using `us-east-1` to minimise latency, as this region will be closest to where the Netlify functions are deployed if using their free plan. However, the Aiven free plans are currently available in the following regions and you can pick whichever you like:
+    We recommend using `aws-us-east-1` to minimise latency, as this region will be closest to where the Netlify free plan deploys its functions. However, the Aiven free plans are currently available in the following regions and you can pick whichever you like:
     * EMEA: aws-eu-north-1, aws-eu-west-1, aws-eu-west-2, aws-eu-west-3
     * Americas: aws-us-east-1, aws-us-east-2, aws-us-west-2, aws-ca-central-1
     * APAC: aws-ap-south-1
 
-1. Select **Free** plan.
+1. Select the **Free** plan.
 1. Click **Create free service**.
 
-# Step 2. Get the application code
+## Get the application code
 
-To deploy the application to Netlify you'll need to have your own GitHub repository for [Aiven-Labs/nextjs-netlify](https://github.com/Aiven-Labs/nextjs-netlify). See the relevant [GitHub CLI instructions to fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo?tool=cli#forking-a-repository).
+To deploy the application to Netlify you'll need your own fork of the [Aiven-Labs/nextjs-netlify](https://github.com/Aiven-Labs/nextjs-netlify) GitHub repository.
+
+You can go to https://github.com/Aiven-Labs/nextjs-netlify, use the **Fork** button to get your own fork, and then `git clone` that, or see the [GitHub CLI instructions to fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo?tool=cli#forking-a-repository).
 
 
-Fork and clone the forked repository with GitHub CLI
+For instance, to fork and clone the repository with GitHub CLI:
 
 ```
 gh repo fork https://github.com/Aiven-Labs/nextjs-netlify.git --clone --remote
 ```
 
-You can name the repository by adding `--fork-name <name>` to the command.
+> **Tip** You can change the name of the forked repository by adding `--fork-name <name>` to the command.
 
-# Step 3. Deploy the application
+## Deploy the application
 
 Follow the instructions below to configure continuous deployment. This will automatically deploy your changes.
 
@@ -64,7 +66,7 @@ Follow the instructions below to configure continuous deployment. This will auto
 
 1. Configure continuous deployment:
 
-    Start and follow the automated setup process. Choose to create a new site, and then select the default options for other prompts. Note that you will be required to authorize Netlify with GitHub. You can do so either through app.netlify.com or with a GitHub personal access token.
+    Start and follow the automated setup process. Choose to create a new site, and then select the default options for other prompts. Note that you will be required to authorize Netlify with GitHub. You can do so either through `app.netlify.com` or with a GitHub personal access token.
 
     ```
     netlify init
@@ -87,7 +89,7 @@ Follow the instructions below to configure continuous deployment. This will auto
         * To create a new database, replace `defaultdb` with the new database name.
         * To configure the schema for the application, add `&schema=public` to the end of the URI.
 
-        Example URI below:
+        The PostgreSQL URI will be in this form (shown with `&schema=public` added):
         ```
         postgres://user:password@host:port/defaultdb?sslmode=require&schema=public
         ```
@@ -96,7 +98,7 @@ Follow the instructions below to configure continuous deployment. This will auto
 
         Copy the Redis URI from the `Service Overview` page in the Aiven console and paste it in as the `REDIS_URI` value.
 
-        Example URI below:
+        The Redis URI will be in this form:
         ```
         rediss://user:password@host:port
         ```
@@ -104,9 +106,9 @@ Follow the instructions below to configure continuous deployment. This will auto
 
 1. Deploy the site:
 
-    Go to the **Deploys** section in Netlify and trigger the deployment by clicking the `Trigger deploy` -button.
+    Go to the **Deploys** section in Netlify and trigger the deployment by clicking the `Trigger deploy` button.
 
-    **NOTE:** The database migrations and seed are done during the Netlify deployment process. Make sure you have the PostgreSQL database up and running when deploying to achieve a working environment on the first try.
+    > **Note:** The database migrations and seed are done during the Netlify deployment process. Make sure you have the PostgreSQL database up and running when deploying to achieve a working environment on the first try.
      
 1. Visit the deployed site:
 
@@ -118,13 +120,15 @@ Follow the instructions below to configure continuous deployment. This will auto
 
 Congratulations, you have now successfully deployed your application. Any subsequent changes you push will automatically be deployed to your site.
 
-# Step 4. Use the application
+## Use the application
 
 This example application has a **Home** page with some relevant links and a **Recipes** page where you can browse and inspect recipes. You can like recipes that seem interesting and filter the list to show only liked ones. Furthermore, you can see interesting statistics from all of the recipes and those that are liked.
 
-Aiven for PostgreSQL is used as the database for storing all recipes and whether they are liked or not. Aiven for Redis is optional for the app to function, but when configured statistics are cached to offer faster response time. You are able to toggle Redis on and off. The database response times are shown in the app to demonstrate the difference.
+Aiven for PostgreSQL is used as the database for storing all recipes and whether they are liked or not. Aiven for Redis is not necessaru for the app to function, but using it means that statistics are cached to offer faster response times. You can toggle the use of Redis on and off, and the response times will be shown in the app to demonstrate the difference.
 
-# For more information, see
+## Find out more
+
+For more information, see the
 
 * [Aiven documentation](https://docs.aiven.io)
 * [Aiven for PostgreSQL documentation](https://docs.aiven.io/docs/products/postgresql)
