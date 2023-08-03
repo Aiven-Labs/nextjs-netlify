@@ -25,12 +25,13 @@ Follow the instructions below to create your free Aiven for PostgreSQL and Aiven
 1. Select the service you want to create, either **PostgreSQL** or **Redis**.
 1. Select **AWS** as the cloud provider and choose the region.
 
-    We recommend using `aws-us-east-1` to minimise latency, as this region will be closest to where the Netlify free plan deploys its functions. However, the Aiven free plans are currently available in the following regions and you can pick whichever you like:
+    We recommend using `aws-us-east-1` in the North America region to minimise latency, as this region will be closest to where the Netlify free plan deploys its functions. However, the Aiven free plans are currently available in the following regions and you can pick whichever you like:
     * EMEA: aws-eu-north-1, aws-eu-west-1, aws-eu-west-2, aws-eu-west-3
     * Americas: aws-us-east-1, aws-us-east-2, aws-us-west-2, aws-ca-central-1
     * APAC: aws-ap-south-1
 
 1. Select the **Free** plan.
+1. Optionally, choose a descriptive name for the service.
 1. Click **Create free service**.
 
 ## Get the application code
@@ -115,6 +116,8 @@ Follow the instructions below to configure continuous deployment. This will auto
     ```
      netlify open --site
     ```
+    
+    > **Tip** Whrn the site starts up, choose **Recipes** at the top left of the window to go to the app.
 
 Congratulations, you have now successfully deployed your application. Any subsequent changes you push will automatically be deployed to your site.
 
@@ -122,7 +125,7 @@ Congratulations, you have now successfully deployed your application. Any subseq
 
 This example application has a **Home** page with some relevant links and a **Recipes** page where you can browse and inspect recipes. You can like recipes that seem interesting and filter the list to show only liked ones. Furthermore, you can see interesting statistics from all of the recipes and those that are liked.
 
-Aiven for PostgreSQL is used as the database for storing all recipes and whether they are liked or not. Aiven for Redis is not necessaru for the app to function, but using it means that statistics are cached to offer faster response times. You can toggle the use of Redis on and off, and the response times will be shown in the app to demonstrate the difference.
+Aiven for PostgreSQL is used as the database for storing all recipes and whether they are liked or not. Aiven for Redis is not necessary for the app to function, but using it means that statistics are cached to offer faster response times. You can toggle the use of Redis on and off, and the response times will be shown in the app to demonstrate the difference.
 
 ## Find out more
 
