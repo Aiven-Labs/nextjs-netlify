@@ -41,8 +41,9 @@ See the [GitHub CLI instructions to fork the repository](https://docs.github.com
 
 For instance, to fork and clone the repository with GitHub CLI:
 
-```
-gh repo fork https://github.com/Aiven-Labs/nextjs-netlify.git --clone --remote
+```shell
+gh repo fork https://github.com/Aiven-Labs/nextjs-netlify.git \
+    --clone --remote
 ```
 
 > **Tip** You can change the name of the forked repository by adding `--fork-name <name>` to the command.
@@ -53,13 +54,13 @@ Follow the instructions below to configure continuous deployment. This will auto
 
 1. Navigate to the `nextjs-netlify` directory on your local machine:
 
-    ```
+    ```shell
     cd nextjs-netlify
     ```
 
 1. Sign into your Netlify account to obtain the access token:
 
-    ```
+    ```shell
     netlify login
     ```
 
@@ -67,13 +68,13 @@ Follow the instructions below to configure continuous deployment. This will auto
 
     Start and follow the automated setup process. Choose to create a new site, and then select the default options for other prompts. Note that you will be required to authorize Netlify with GitHub. You can do so either through `app.netlify.com` or with a GitHub personal access token.
 
-    ```
+    ```shell
     netlify init
     ```
 
 1. Open the Netlify site admin user interface:
 
-    ```
+    ```shell
     netlify open --admin
     ```
 
@@ -113,7 +114,7 @@ Follow the instructions below to configure continuous deployment. This will auto
 
     Open the site from the Netlify admin user interface or from the command line with:
 
-    ```
+    ```shell
      netlify open --site
     ```
     
