@@ -140,4 +140,4 @@ For more information, see the
 
 -------
 
-*PostgreSQL is a trademark or registered trademark of the PostgreSQL Community Association of Canada, and used with their permission. *Redis is a registered trademark of Redis Ltd. Any rights therein are reserved to Redis Ltd. Any use by Aiven is for referential purposes only and does not indicate any sponsorship, endorsement or affiliation between Redis and Aiven. All product and service names used in this website are for identification purposes only and do not imply endorsement.*
+*PostgreSQL is a trademark or registered trademark of the PostgreSQL Community Association of Canada, and used with their permission. \*Redis is a registered trademark of Redis Ltd. Any rights therein are reserved to Redis Ltd. Any use by Aiven is for referential purposes only and does not indicate any sponsorship, endorsement or affiliation between Redis and Aiven. All product and service names used in this website are for identification purposes only and do not imply endorsement.*
