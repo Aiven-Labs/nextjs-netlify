@@ -15,13 +15,14 @@ export default function Home() {
     >
       <Box display="flex" gap="3" justifyContent="center" className="flex-wrap">
         <Chip text="Aiven for PostgreSQL®" />
-        <Chip text="Aiven for Redis®" />
+        <Chip text="Aiven for Redis®*" />
       </Box>
       <Typography.LargeHeading>
         Free Netlify quickstart recipe library app using Next.js, Prisma and Aiven
       </Typography.LargeHeading>
       <Typography.Large color="grey-60">
-        A PostgreSQL and Redis optimized Next.js application built with Aiven, Prisma and open source data - for free.
+        A PostgreSQL® and Redis®* optimized Next.js application built with Aiven, Prisma and open source data - for
+        free.
       </Typography.Large>
       <Box.Flex gap="5" justifyContent="center" className="flex-wrap">
         <Button.ExternalLink
