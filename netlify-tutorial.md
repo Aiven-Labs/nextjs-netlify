@@ -36,9 +36,7 @@ Follow the instructions below to create your free Aiven for PostgreSQL and Aiven
 ## Get the application code
 
 To deploy the application to Netlify you'll need your own fork of the [Aiven-Labs/nextjs-netlify](https://github.com/Aiven-Labs/nextjs-netlify) GitHub repository.
-
-You can go to https://github.com/Aiven-Labs/nextjs-netlify, use the **Fork** button to get your own fork, and then `git clone` that, or see the [GitHub CLI instructions to fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo?tool=cli#forking-a-repository).
-
+See the [GitHub CLI instructions to fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo?tool=cli#forking-a-repository).
 
 For instance, to fork and clone the repository with GitHub CLI:
 
