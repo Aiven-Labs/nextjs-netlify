@@ -26,9 +26,9 @@ Follow the instructions below to create your free Aiven for PostgreSQL and Aiven
 1. Select **AWS** as the cloud provider and choose the region.
 
     We recommend using `aws-us-east-1` in the North America region to minimise latency, as this region will be closest to where the Netlify free plan deploys its functions. However, the Aiven free plans are currently available in the following regions and you can pick whichever you like:
-    * EMEA: aws-eu-north-1, aws-eu-west-1, aws-eu-west-2, aws-eu-west-3
-    * Americas: aws-us-east-1, aws-us-east-2, aws-us-west-2, aws-ca-central-1
-    * APAC: aws-ap-south-1
+    * EMEA: `aws-eu-north-1`, `aws-eu-west-1`, `aws-eu-west-2`, `aws-eu-west-3`
+    * Americas: `aws-us-east-1`, `aws-us-east-2`, `aws-us-west-2`, `aws-ca-central-1`
+    * APAC: `aws-ap-south-1`
 
 1. Select the **Free** plan.
 1. Optionally, choose a descriptive name for the service.
@@ -117,7 +117,7 @@ Follow the instructions below to configure continuous deployment. This will auto
      netlify open --site
     ```
     
-    > **Tip** Whrn the site starts up, choose **Recipes** at the top left of the window to go to the app.
+    > **Tip** Whrn the site starts up, choose **Recipes** at the top left of the window to go to the main part of the app.
 
 Congratulations, you have now successfully deployed your application. Any subsequent changes you push will automatically be deployed to your site.
 
