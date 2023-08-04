@@ -1,4 +1,4 @@
-# Deploy a Netlify app built on Aiven
+# Use Netlify to deploy your Next.js, PostgreSQL® and Redis®* app
 
 This tutorial guides you through deploying a [Netlify](https://www.netlify.com/) web application with an [Aiven for PostgreSQL®](https://aiven.io/postgresql) and [Aiven for Redis®](https://aiven.io/redis) backend.
 
