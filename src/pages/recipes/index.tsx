@@ -63,7 +63,7 @@ export default function Recipes() {
                     onChange={() => setUseRedis(!useRedis)}
                     checked={useRedis}
                   >
-                    Enable Aiven for Redis®
+                    Enable Aiven for Redis®*
                   </Switch>
                 </Box>
               )}
@@ -82,7 +82,7 @@ export default function Recipes() {
           title="All recipes"
           subtitle={
             <Box.Flex flexDirection="column" gap="5">
-              <Box>{`A list of recipes retrieved from a Aiven for PostgreSQL® database, retrieved in ${
+              <Box>{`A list of recipes retrieved from an Aiven for PostgreSQL® database, retrieved in ${
                 recipesData?.endToEndRetrievalTimeMs ?? '??'
               }ms. ${endToEndInfo}.`}</Box>
               <Box minWidth="fit">
@@ -120,16 +120,16 @@ const getStatisticsInfo = (stats: RecipeStatsResponse | undefined, useRedis: boo
   const endToEndRetrievalTime = `${stats?.endToEndRetrievalTimeMs ?? '??'}ms. ${endToEndInfo}`;
 
   if (!stats?.isRedisAvailable) {
-    return `Recipe statistics retrieved from PostgreSQL database in ${endToEndRetrievalTime}. To get cached results using Aiven for Redis®, please follow the instructions to set up your Redis instance.`;
+    return `Recipe statistics retrieved from Aiven for PostgreSQL® database in ${endToEndRetrievalTime}. To get cached results using Aiven for Redis®*, please follow the instructions to set up your Redis instance.`;
   }
 
   if (useRedis) {
     if (stats.fromCache) {
-      return `Recipe statistics cached in Aiven for Redis®, retrieved in ${endToEndRetrievalTime}.`;
+      return `Recipe statistics cached in Aiven for Redis®*, retrieved in ${endToEndRetrievalTime}.`;
     }
 
-    return `Recipe statistics retrieved from PostgreSQL database in ${endToEndRetrievalTime}. Results are now cached to Aiven for Redis®.`;
+    return `Recipe statistics retrieved from Aiven for PostgreSQL® database in ${endToEndRetrievalTime}. Results are now cached to Aiven for Redis®*.`;
   }
 
-  return `Recipe statistics retrieved from PostgreSQL database in ${endToEndRetrievalTime}. To get cached results using Aiven for Redis®, please enable it.`;
+  return `Recipe statistics retrieved from Aiven for PostgreSQL® database in ${endToEndRetrievalTime}. To get cached results using Aiven for Redis®*, please enable it.`;
 };
