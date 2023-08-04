@@ -8,20 +8,20 @@ About the app
 
 The application is a recipe library where you can browse and inspect recipes. Additionally, you can like recipes that seem interesting and filter list to show only liked ones. Furthermore, you can see interesting statistics from all of the recipes and those that are liked.
 
-PostgreSQL is used as the data storage for storing all recipes and whether they are liked or not. Redis is optional, but when configured statistics are cached to offer faster response time. The database response times are shown in the app to demonstrate the difference. You can get a free PostgreSQL and Redis to use from Aiven by [signing up](https://console.aiven.io/signup).
+PostgreSQL® is used as the data storage for storing all recipes and whether they are liked or not. Redis®* is optional, but when configured statistics are cached to offer faster response time. The database response times are shown in the app to demonstrate the difference. You can get free services with Aiven for PostgreSQL and Aiven for Redis by [signing up](https://console.aiven.io/signup).
 
 The application is designed to be hosted on serverless application platform Netlify, which has amazing support for hosting Next.js applications.
 
 Getting started
 ============
 
-The app requires PostgreSQL database. Configuring Redis is optional, but highly recommended to demonstrate all features of the application and the benefits of having a Redis as part of your application. Using `us-east-1` region is recommended to minimise latency, as this region will be closest to where the Netlify functions are deployed if using their free plan.
+The app requires a PostgreSQL database. Configuring Redis is optional, but highly recommended to demonstrate all features of the application and the benefits of having Redis as part of your application. Using `us-east-1` region is recommended to minimise latency, as this region will be closest to where the Netlify functions are deployed if using their free plan.
 
-Get free PostgreSQL and Redis from [Aiven](https://console.aiven.io).
+Get free Aiven for PostgreSQL and Aiven for Redis from [Aiven](https://console.aiven.io/singup).
 
 ## Fork and deploy to Netlify
 
-You can fork this branch and deploy the application immediately to Netlify by clicking the button below. Database migrations and seed is done during the Netlify deployment process. Make sure you have PostgreSQL database up and running when deploying to achieve working environment on the first try.
+You can fork this branch and deploy the application immediately to Netlify by clicking the button below. Database migration and seed is done during the Netlify deployment process. Make sure you have your PostgreSQL database up and running when deploying to achieve a working environment on the first try.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Aiven-Labs/nextjs-netlify)
 
@@ -47,7 +47,7 @@ Congratulations you can now start developing. The page reloads automatically as 
 Netlify deployment
 ============
 
-You can fork this branch and deploy the application immediately to Netlify by clicking the button below. Database migrations and seed is done during the Netlify deployment process. Make sure you have PostgreSQL database up and running when deploying to achieve working environment on the first try.
+You can fork this branch and deploy the application immediately to Netlify by clicking the button below. Database migrations and seed is done during the Netlify deployment process. Make sure you have PostgreSQL database up and running when deploying to achieve a working environment on the first try.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Aiven-Labs/nextjs-netlify)
 
@@ -66,11 +66,15 @@ You can fork this branch and deploy the application immediately to Netlify by cl
 
 You can now push changes and your changes will be automatically deployed to your site.
 
-License
+Licenses
 ============
 nextjs-netlify is licensed under the Apache license, version 2.0. Full license text is available in the [LICENSE](LICENSE) file.
+Please note that the project explicitly does not require a CLA (Contributor
+License Agreement) from its contributors.
 
-Please note that the project explicitly does not require a CLA (Contributor License Agreement) from its contributors.
+PostgreSQL is a trademark or registered trademark of the PostgreSQL Community Association of Canada, and used with their permission.
+*Redis is a registered trademark of Redis Ltd. Any rights therein are reserved to Redis Ltd. 
+Any use by Aiven is for referential purposes only and does not indicate any sponsorship, endorsement or affiliation between Redis and Aiven.  All product and service names used in this website are for identification purposes only and do not imply endorsement.
 
 Contact
 ============
