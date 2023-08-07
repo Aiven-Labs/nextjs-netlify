@@ -118,7 +118,7 @@ Follow the instructions below to configure continuous deployment. This will auto
      netlify open --site
     ```
     
-    > **Tip** Whrn the site starts up, choose **Recipes** at the top left of the window to go to the main part of the app.
+    > **Tip** When the site starts up, choose **Recipes** at the top left of the window to go to the main part of the app.
 
 Congratulations, you have now successfully deployed your application. Any subsequent changes you push will automatically be deployed to your site.
 
