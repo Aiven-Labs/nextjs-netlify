@@ -84,7 +84,7 @@ Follow the instructions below to configure continuous deployment. This will auto
     1. Go to **Environment variables**.
     1. Add variable `DATABASE_URL`:
 
-        Copy the PostgreSQL database URI from the `Service Overview` page in the Aiven console and paste it in as the `DATABASE_URL` value.
+        Copy the PostgreSQL database URI from the service's **Overview** page in the Aiven console and paste it in as the `DATABASE_URL` value.
         
         * To create a new database, replace `defaultdb` with the new database name.
         * To configure the schema for the application, add `&schema=public` to the end of the URI.
@@ -96,7 +96,7 @@ Follow the instructions below to configure continuous deployment. This will auto
 
     1. Add variable `REDIS_URI`:
 
-        Copy the Redis URI from the `Service Overview` page in the Aiven console and paste it in as the `REDIS_URI` value.
+        Copy the Redis URI from the service's **Overview** page in the Aiven console and paste it in as the `REDIS_URI` value.
 
         The Redis URI will be in this form:
         ```
