@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "prisma generate && next dev",
     "build": "prisma generate && next build",
-    "build-netlify": "prisma generate && next build && prisma migrate deploy && prisma db seed",
+    "build-deploy": "prisma generate && next build && prisma migrate deploy && prisma db seed",
     "seed": "prisma db seed",
     "reset-db": "prisma migrate reset --force",
     "start": "next start",
@@ -38,7 +38,6 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "netlify-cli": "^15.8.0",
     "prisma": "^4.16.2",
     "ts-node": "^10.9.1"
   }
