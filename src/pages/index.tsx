@@ -18,7 +18,7 @@ export default function Home() {
         <Chip text="Aiven for Redis®*" />
       </Box>
       <Typography.LargeHeading>
-        Free Netlify quickstart recipe library app using Next.js, Prisma and Aiven
+        Super Awesome Recipes For You!
       </Typography.LargeHeading>
       <Typography.Large color="grey-60">
         A PostgreSQL® and Redis®* optimized Next.js application built with Aiven, Prisma and open source data - for
