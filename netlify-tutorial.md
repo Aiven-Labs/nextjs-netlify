@@ -26,9 +26,9 @@ Follow the instructions below to create your free Aiven for PostgreSQL and Aiven
 1. Select **DigitalOcean** as the cloud provider and choose the region.
 
     We recommend using `do-nyc` in the North America region to minimise latency, as this region will be closest to where the Netlify free plan deploys its functions. However, the Aiven free plans are currently available in the following regions and you can pick whichever you like:
-    * EMEA: `do-ams`, `do-fra`, `do-lon`
-    * Americas: `do-nyc`, `do-sfo`, `do-tor`
-    * APAC: `do-blr`, `do-sgp`, `do-syd`
+    * EMEA: `do-ams` (Amsterdam), `do-ldn` (London), `do-fra` (Frankfurt)
+    * Americas: `do-nyc` (New York), `do-sfo` (San Francisco), `do-tor` (Toronto)
+    * APAC: `do-blr` (Bangalore)
 
 1. Select the **Free** plan.
 1. Optionally, choose a descriptive name for the service.
