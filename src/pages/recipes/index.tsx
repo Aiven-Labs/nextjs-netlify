@@ -59,11 +59,11 @@ export default function Recipes() {
               {recipeStatsData?.isRedisAvailable && (
                 <Box minWidth="fit">
                   <Switch
-                    caption="Get statistics faster with Redis"
+                    caption="Get statistics faster with Aiven for Caching"
                     onChange={() => setUseRedis(!useRedis)}
                     checked={useRedis}
                   >
-                    Enable Aiven for Redis®*
+                    Enable Aiven for Caching
                   </Switch>
                 </Box>
               )}
@@ -120,16 +120,16 @@ const getStatisticsInfo = (stats: RecipeStatsResponse | undefined, useRedis: boo
   const endToEndRetrievalTime = `${stats?.endToEndRetrievalTimeMs ?? '??'}ms. ${endToEndInfo}`;
 
   if (!stats?.isRedisAvailable) {
-    return `Recipe statistics retrieved from Aiven for PostgreSQL® database in ${endToEndRetrievalTime}. To get cached results using Aiven for Redis®*, please follow the instructions to set up your Redis instance.`;
+    return `Recipe statistics retrieved from Aiven for PostgreSQL® database in ${endToEndRetrievalTime}. To get cached results using Aiven for Caching, please follow the instructions to set up your Aiven for Caching instance.`;
   }
 
   if (useRedis) {
     if (stats.fromCache) {
-      return `Recipe statistics cached in Aiven for Redis®*, retrieved in ${endToEndRetrievalTime}.`;
+      return `Recipe statistics cached in Aiven for Caching, retrieved in ${endToEndRetrievalTime}.`;
     }
 
-    return `Recipe statistics retrieved from Aiven for PostgreSQL® database in ${endToEndRetrievalTime}. Results are now cached to Aiven for Redis®*.`;
+    return `Recipe statistics retrieved from Aiven for PostgreSQL® database in ${endToEndRetrievalTime}. Results are now cached to Aiven for Caching.`;
   }
 
-  return `Recipe statistics retrieved from Aiven for PostgreSQL® database in ${endToEndRetrievalTime}. To get cached results using Aiven for Redis®*, please enable it.`;
+  return `Recipe statistics retrieved from Aiven for PostgreSQL® database in ${endToEndRetrievalTime}. To get cached results using Aiven for Caching, please enable it.`;
 };

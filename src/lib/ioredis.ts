@@ -16,7 +16,7 @@ const createRedisInstance = () => {
   redis.on('error', () => {
     // eslint-disable-next-line no-console
     console.warn(
-      'Creating Redis instance failed. Results will not cached. Make sure your REDIS_URI environment variable points to a running Aiven for Redis® instance and restart your application.',
+      'Creating Redis instance failed. Results will not cached. Make sure your REDIS_URI environment variable points to a running Aiven for Caching instance and restart your application.',
     );
   });
 

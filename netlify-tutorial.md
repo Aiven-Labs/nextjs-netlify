@@ -1,8 +1,8 @@
-# Use Netlify to deploy your Next.js, PostgreSQL® and Redis®* app
+# Use Netlify to deploy your Next.js, PostgreSQL® and Aiven for Caching app
 
-This tutorial guides you through deploying a [Netlify](https://www.netlify.com/) web application with an [Aiven for PostgreSQL®](https://aiven.io/postgresql) and [Aiven for Redis®](https://aiven.io/redis) backend.
+This tutorial guides you through deploying a [Netlify](https://www.netlify.com/) web application with an [Aiven for PostgreSQL®](https://aiven.io/postgresql) and [Aiven for Caching](https://aiven.io/caching) backend.
 
-The sample application used in this tutorial is a cooking recipe library displaying open source [recipe data](https://www.kaggle.com/datasets/thedevastator/better-recipes-for-a-better-life). It's built in [Next.js](https://nextjs.org/), which can be deployed to Netlify with ease, and connects to PostgreSQL with [Prisma](https://www.prisma.io/) and Redis with [ioredis](https://www.npmjs.com/package/ioredis).
+The sample application used in this tutorial is a cooking recipe library displaying open source [recipe data](https://www.kaggle.com/datasets/thedevastator/better-recipes-for-a-better-life). It's built in [Next.js](https://nextjs.org/), which can be deployed to Netlify with ease, and connects to PostgreSQL with [Prisma](https://www.prisma.io/) and Aiven for Caching with [ioredis](https://www.npmjs.com/package/ioredis).
 
 The source code for the application is available on GitHub at https://github.com/Aiven-Labs/nextjs-netlify.
 
@@ -15,14 +15,14 @@ Before starting the tutorial, do the following if you haven't already:
 1. Install the [GitHub CLI](https://github.com/cli/cli#installation).
 1. Install the [Netlify CLI](https://docs.netlify.com/cli/get-started/).
 
-## Create free PostgreSQL and Redis services
+## Create free PostgreSQL and Aiven for Caching services
 
-Follow the instructions below to create your free Aiven for PostgreSQL and Aiven for Redis services. You can read more about the Aiven free plans in the [Aiven documentation](https://docs.aiven.io/docs/platform/concepts/free-plan).
+Follow the instructions below to create your free Aiven for PostgreSQL and Aiven for Caching services. You can read more about the Aiven free plans in the [Aiven documentation](https://docs.aiven.io/docs/platform/concepts/free-plan).
 
 1. Login to the [Aiven Console](https://console.aiven.io).
 1. Choose the project you want your service to be in.
 1. On the **Services** page, click **Create service**.
-1. Select the service you want to create, either **PostgreSQL** or **Redis**.
+1. Select the service you want to create, either **PostgreSQL** or **Aiven for Caching**.
 1. Select **DigitalOcean** as the cloud provider and choose the region.
 
     We recommend using `do-nyc` in the North America region to minimise latency, as this region will be closest to where the Netlify free plan deploys its functions. However, the Aiven free plans are currently available in the following regions and you can pick whichever you like:
@@ -126,15 +126,15 @@ Congratulations, you have now successfully deployed your application. Any subseq
 
 This example application has a **Home** page with some relevant links and a **Recipes** page where you can browse and inspect recipes. You can like recipes that seem interesting and filter the list to show only liked ones. Furthermore, you can see interesting statistics from all of the recipes and those that are liked.
 
-Aiven for PostgreSQL is used as the database for storing all recipes and whether they are liked or not. Aiven for Redis is not necessary for the app to function, but using it means that statistics are cached to offer faster response times. You can toggle the use of Redis on and off, and the response times will be shown in the app to demonstrate the difference.
+Aiven for PostgreSQL is used as the database for storing all recipes and whether they are liked or not. Aiven for Caching is not necessary for the app to function, but using it means that statistics are cached to offer faster response times. You can toggle the use of Caching on and off, and the response times will be shown in the app to demonstrate the difference.
 
 ## Find out more
 
 For more information, see the
 
-* [Aiven documentation](https://docs.aiven.io)
-* [Aiven for PostgreSQL documentation](https://docs.aiven.io/docs/products/postgresql)
-* [Aiven for Redis documentation](https://docs.aiven.io/docs/products/redis)
+* [Aiven documentation](https://aiven.io/docs)
+* [Aiven for PostgreSQL documentation](https://aiven.io/docs/products/postgresql)
+* [Aiven for Caching documentation](https://aiven.io/docs/products/caching)
 * [Netlify CLI Command list](https://cli.netlify.com/)
 
 <!-- The following text does not go into the final tutorial, as the tutorial footer provides it -->

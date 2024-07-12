@@ -8,7 +8,7 @@ Contributions are very welcome on the Aiven netlify-nextjs example. When contrib
 
 # Development
 
-Development of this project requires a PostgreSQL database as well as a Redis database. You can use a local database or use the Aiven for PostgreSQL® and Aiven for Redis® managed databases, available on https://aiven.io.
+Development of this project requires a PostgreSQL database as well as a Redis compatible database. You can use a local database or use the Aiven for PostgreSQL® and Aiven for Caching managed databases, available on https://aiven.io.
 
 ## Local Environment
 
